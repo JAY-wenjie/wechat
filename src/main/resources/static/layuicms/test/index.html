@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+</head>
+<script type="text/javascript" src="../zTree_v3/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="../zTree_v3/js/jquery.ztree.all.js"></script>
+<body>
+<ul id="tree" class="ztree" style="width:230px; overflow:auto;"></ul>
+</body>
+<script type="text/javascript" >
+    var zTreeObj,
+        setting = {
+            callback: {
+                onClick: zTreeOnClick
+            },
+            view: {
+                selectedMulti: false
+            },
+            data: {
+                key: {
+                    name: "menuName"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pId",
+                    rootPId: 0
+                }
+
+            }
+        };
+    function zTreeOnClick(event, treeId, treeNode) {
+        alert(treeNode.tId + ", " + treeNode.menuName + " ," + treeNode.id);
+        alert("event: " + event + "   treeId: " + treeId + "   treeNode: " + treeNode);
+    };
+    $(document).ready(function(){
+        $.ajax({
+            type:"post",
+            url:"http://localhost:8080/wechatone/index.do",
+            dataType:"json",
+            success:function(data){
+                zTreeObj = $.fn.zTree.init($("#tree"), setting, data.data);
+            }
+        })
+
+
+    });
+
+
+</script>
+</html>
