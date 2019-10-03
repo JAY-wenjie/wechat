@@ -21,7 +21,7 @@ public class TestController2 {
     @RequestMapping(value = "userScore")
     public String userScore(HttpSession httpSession){
         WxUser wxUser=new WxUser();
-        wxUser.setId(4);
+        wxUser.setId(1);
         UserScore userScore=usereScoreService.selectByUserId(wxUser);
         return userScore.toString();
     }
