@@ -27,6 +27,7 @@ public class TestController2 {
     }
     /**
      * 用户进行签到,更新用户积分、连续天数、最后一次签到时间
+     * by杨思源
      */
     @RequestMapping(value = "userSign")
     public String userSign(HttpSession httpSession){

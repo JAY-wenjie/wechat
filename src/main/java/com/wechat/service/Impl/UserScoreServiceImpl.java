@@ -35,6 +35,7 @@ public class UserScoreServiceImpl implements UsereScoreService {
 
     /**
      * 用户进行签到,修改用户积分、连续天数、最后一次签到时间
+     * by杨思源
      */
     @Override
     public UserScore userSign(WxUser wxUser) {
