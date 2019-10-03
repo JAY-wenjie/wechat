@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.aaa.wechat.domain.mapper.WxUserMapper">
-  <resultMap id="BaseResultMap" type="com.aaa.wechat.domain.model.WxUser">
+<mapper namespace="com.wechat.domain.mapper.WxUserMapper">
+  <resultMap id="BaseResultMap" type="com.wechat.domain.model.WxUser">
     <!--@mbg.generated-->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="openid" jdbcType="VARCHAR" property="openid" />
@@ -20,35 +20,38 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, openid, subscribe, nickname, sex, city, country, province, `language`, headimgurl, 
-    subscribeTime, unionid, remark, groupid
+    id, openid, subscribe, nickname, sex, city, country, province, `language`,
+    headimgurl, subscribeTime, unionid, remark, groupid
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="string" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from wx_user
-    where id = #{id,jdbcType=INTEGER}
+    where openid = #{openid,jdbcType=VARCHAR}
   </select>
+    <select id="selectFriendById" parameterType="com.wechat.domain.model.WxUser" resultMap="BaseResultMap">
+        select b.* from user_qrcode a inner join wx_user b on a.new_id = b.id and a.old_id = #{wxUser.id,jdbcType=INTEGER}
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from wx_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.aaa.wechat.domain.model.WxUser" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.WxUser" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into wx_user (openid, subscribe, nickname, 
-      sex, city, country, 
+      sex, city, country,
       province, `language`, headimgurl, 
       subscribeTime, unionid, remark, 
       groupid)
     values (#{openid,jdbcType=VARCHAR}, #{subscribe,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR},
       #{province,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, 
       #{subscribetime,jdbcType=TIMESTAMP}, #{unionid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{groupid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.aaa.wechat.domain.model.WxUser" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.WxUser" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into wx_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -134,7 +137,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.aaa.wechat.domain.model.WxUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.WxUser" useGeneratedKeys="true" keyProperty="id">
     <!--@mbg.generated-->
     update wx_user
     <set>
@@ -178,9 +181,9 @@
         groupid = #{groupid,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where openid = #{openid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.aaa.wechat.domain.model.WxUser">
+  <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.WxUser">
     <!--@mbg.generated-->
     update wx_user
     set openid = #{openid,jdbcType=VARCHAR},
@@ -198,4 +201,5 @@
       groupid = #{groupid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>
