@@ -165,6 +165,7 @@ public class MessageServiceImpl implements MessageService {
             item.addContent(new Element("Description").addContent(new CDATA(message.getDescription())));
             item.addContent(new Element("PicUrl").addContent(new CDATA(message.getPicurl())));
             try {
+                System.out.println("网页授权");
                 String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constant.APPID+"&redirect_uri="+ URLEncoder.encode(message.getUrl(),"utf-8")+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
                 item.addContent(new Element("Url").addContent(new CDATA(url)));
 

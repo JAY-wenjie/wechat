@@ -9,7 +9,7 @@ $(function(){
             //alert("服务器返回code值:"+code);
             $.ajax({
                 type: "post",
-                url: "http://5k9if5r.hn3.mofasuidao.cn/web-wechat/code.do",
+                url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/code.do",
                 data: {"code": code},
                 async: false,
                 dataType: "json",
