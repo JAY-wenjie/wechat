@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.domain.mapper.UserQrcodeMapper">
+  <resultMap id="BaseResultMap" type="com.wechat.domain.model.UserQrcode">
+    <!--@mbg.generated generated on Fri Sep 27 09:32:39 CST 2019.-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="old_id" jdbcType="INTEGER" property="oldId" />
+    <result column="new_id" jdbcType="INTEGER" property="newId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Fri Sep 27 09:32:39 CST 2019.-->
+    id, old_id, new_id
+  </sql>
+</mapper>
