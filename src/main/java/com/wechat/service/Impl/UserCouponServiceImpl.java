@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author:杨思源
@@ -47,7 +48,7 @@ public class UserCouponServiceImpl implements UserCouponService {
                     discountCoupon.getPayScore(), 1, date);
             userScoreMapper.reduceUserScores(userScore1);
             //用户积分详情表更新,记录这次兑换
-            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "用户领取优惠券,积分-" + discountCoupon.getPayScore(), date);
+            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "用户兑换优惠券,积分-" + discountCoupon.getPayScore(), date);
             scoreInfoMapper.insert(scoreInfo);
             //返回1表示成功领取
             System.out.println("您已成功领取优惠券");
@@ -59,4 +60,5 @@ public class UserCouponServiceImpl implements UserCouponService {
             return 0;
         }
     }
+
 }

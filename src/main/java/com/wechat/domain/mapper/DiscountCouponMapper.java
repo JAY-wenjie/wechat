@@ -1,6 +1,7 @@
 package com.wechat.domain.mapper;
 
 import com.wechat.domain.model.DiscountCoupon;
+import com.wechat.domain.model.UserCoupon;
 
 import java.util.List;
 
@@ -22,8 +23,15 @@ public interface DiscountCouponMapper {
      * by杨思源
      */
     List<DiscountCoupon> selectAll();
+
     /**
      * 用户成功领取优惠券,优惠券库存-1
      */
     int reduceDiscountCoupon(DiscountCoupon discountCoupon);
+
+    /**
+     * 根据优惠券id查找对应的优惠券详情
+     * by杨思源
+     */
+    DiscountCoupon selectDiscountCouponBycouponid(UserCoupon userCoupon);
 }

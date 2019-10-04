@@ -1,9 +1,11 @@
 package com.wechat.controller;
 
 import com.wechat.domain.model.DiscountCoupon;
+import com.wechat.domain.model.ScoreInfo;
 import com.wechat.domain.model.UserScore;
 import com.wechat.domain.model.WxUser;
 import com.wechat.service.DiscountCouponService;
+import com.wechat.service.ScoreInfoService;
 import com.wechat.service.UserCouponService;
 import com.wechat.service.UsereScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class TestController2 {
     DiscountCouponService discountCouponService;
     @Autowired
     UserCouponService userCouponService;
+    @Autowired
+    ScoreInfoService scoreInfoService;
 
     /**
      * 根据用户id查询用户积分
@@ -70,5 +74,17 @@ public class TestController2 {
         discountCoupon.setPayScore(5);
         int i = userCouponService.addUserCoupon(wxUser, discountCoupon);
         return i;
+    }
+
+    /**
+     * 查询用户兑换记录,优惠券和商品
+     * by杨思源
+     */
+    @RequestMapping(value = "document")
+    public String document() {
+        WxUser wxUser = new WxUser();
+        wxUser.setId(1);
+        List<ScoreInfo> scoreInfos = scoreInfoService.selectByuserscoreid(wxUser);
+        return scoreInfos.toString();
     }
 }
