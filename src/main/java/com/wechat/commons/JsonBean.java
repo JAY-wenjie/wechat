@@ -8,16 +8,16 @@ package com.wechat.commons;
 public class JsonBean {
     private int code;
 
-    private Object object;
+    private Object data;
 
     private String msg;
 
     public JsonBean() {
     }
 
-    public JsonBean(int code, Object object, String msg) {
+    public JsonBean(int code, Object data, String msg) {
         this.code = code;
-        this.object = object;
+        this.data = data;
         this.msg = msg;
     }
 
@@ -29,12 +29,12 @@ public class JsonBean {
         this.code = code;
     }
 
-    public Object getObject() {
-        return object;
+    public Object getData() {
+        return data;
     }
 
-    public void setObject(Object object) {
-        this.object = object;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public String getMsg() {

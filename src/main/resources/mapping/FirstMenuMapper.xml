@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.domain.mapper.FirstMenuMapper">
+  <resultMap id="BaseResultMap" type="com.wechat.domain.model.FirstMenu">
+    <!--@mbg.generated generated on Fri Oct 04 13:36:50 CST 2019.-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Fri Oct 04 13:36:50 CST 2019.-->
+    id, `name`
+  </sql>
+
+  <resultMap id="selectAllMenuMap" type="map">
+    <id column="aid" property="aid"></id>
+    <result column="aname" property="aname"></result>
+    <collection javaType="list" ofType="map" property="menu">
+      <id column="bid" property="bid"></id>
+      <result column="bname" property="bname"></result>
+      <collection property="spu" ofType="map" javaType="list">
+        <id column="cid" property="cid"></id>
+        <result column="product_name" property="product_name"></result>
+        <result column="product_spu_img" property="product_spu_img"></result>
+      </collection>
+    </collection>
+  </resultMap>
+
+  <select id="selectAllMenu" resultMap="selectAllMenuMap">
+    SELECT a.id aid,a.name aname,b.id bid,b.name bname,c.id cid,c.product_name,c.product_spu_img FROM first_menu a  left JOIN  second_menu b on a.id=b.first_menu_id left join  poduct_spu c on c.second_menu_id=b.id where c.status=0
+  </select>
+</mapper>
