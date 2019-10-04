@@ -4,6 +4,7 @@ import com.wechat.domain.model.DiscountCoupon;
 import com.wechat.domain.model.UserScore;
 import com.wechat.domain.model.WxUser;
 import com.wechat.service.DiscountCouponService;
+import com.wechat.service.UserCouponService;
 import com.wechat.service.UsereScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,8 @@ public class TestController2 {
     UsereScoreService usereScoreService;
     @Autowired
     DiscountCouponService discountCouponService;
+    @Autowired
+    UserCouponService userCouponService;
 
     /**
      * 根据用户id查询用户积分
@@ -44,12 +47,28 @@ public class TestController2 {
     }
 
     /**
-     * 查询库存的所有优惠券
+     * 查询展示库存所有优惠券
      * by杨思源
      */
     @RequestMapping(value = "coupons")
     public String coupons() {
         List<DiscountCoupon> discountCoupons = discountCouponService.selectAll();
         return discountCoupons.toString();
+    }
+
+    /**
+     * 用户领取优惠券
+     * by杨思源
+     * 返回1表示领取成功,返回0表示领取失败
+     */
+    @RequestMapping(value = "addcoupons")
+    public int addcoupons() {
+        WxUser wxUser = new WxUser();
+        wxUser.setId(1);
+        DiscountCoupon discountCoupon = new DiscountCoupon();
+        discountCoupon.setId(1);
+        discountCoupon.setPayScore(5);
+        int i = userCouponService.addUserCoupon(wxUser, discountCoupon);
+        return i;
     }
 }

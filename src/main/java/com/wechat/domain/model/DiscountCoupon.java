@@ -1,7 +1,10 @@
 package com.wechat.domain.model;
 
 import java.util.Date;
-
+/**
+ * @author:杨思源
+ * @Date:
+ */
 public class DiscountCoupon {
     private Integer id;
 

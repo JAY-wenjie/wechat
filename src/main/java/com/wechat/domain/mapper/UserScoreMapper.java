@@ -34,4 +34,8 @@ public interface UserScoreMapper {
      * 用户断签,连续签到数归0
      */
     int updateUserScoredays(WxUser wxUser);
+    /**
+     * 用户积分减少
+     */
+    int reduceUserScores(UserScore userScore);
 }

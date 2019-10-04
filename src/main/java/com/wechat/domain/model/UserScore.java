@@ -94,6 +94,7 @@ public class UserScore {
         this.lastSign = lastSign;
     }
 
+
     @Override
     public String toString() {
         return "UserScore{" +

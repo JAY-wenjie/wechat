@@ -22,4 +22,8 @@ public interface DiscountCouponMapper {
      * by杨思源
      */
     List<DiscountCoupon> selectAll();
+    /**
+     * 用户成功领取优惠券,优惠券库存-1
+     */
+    int reduceDiscountCoupon(DiscountCoupon discountCoupon);
 }

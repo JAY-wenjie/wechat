@@ -139,4 +139,10 @@
         <include refid="Base_Column_List"/>
         from discount_coupon
     </select>
+    <!--用户成功领取优惠券,库存量-1-->
+    <update id="reduceDiscountCoupon" parameterType="DiscountCoupon">
+        update discount_coupon
+        set coupon_sku=coupon_sku-1
+        where id=#{id}
+    </update>
 </mapper>

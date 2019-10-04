@@ -2,6 +2,10 @@ package com.wechat.domain.model;
 
 import java.util.Date;
 
+/**
+ * @author:杨思源
+ * @Date:
+ */
 public class ScoreInfo {
     /**
      * 积分详情表id
@@ -53,6 +57,9 @@ public class ScoreInfo {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public ScoreInfo() {
     }
 
     public ScoreInfo(Integer scoreId, String detail, Date time) {
