@@ -6,7 +6,7 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="score_id" jdbcType="INTEGER" property="scoreId"/>
         <result column="detail" jdbcType="VARCHAR" property="detail"/>
-        <result column="time" jdbcType="VARCHAR" property="time"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
@@ -29,7 +29,7 @@
         <!--@mbg.generated-->
         insert into score_info (score_id, detail, `time`
         )
-        values (#{scoreId,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}
+        values (#{scoreId,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
         )
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.ScoreInfo"
@@ -55,7 +55,7 @@
                 #{detail,jdbcType=VARCHAR},
             </if>
             <if test="time != null">
-                #{time,jdbcType=VARCHAR},
+                #{time,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -70,7 +70,7 @@
                 detail = #{detail,jdbcType=VARCHAR},
             </if>
             <if test="time != null">
-                `time` = #{time,jdbcType=VARCHAR},
+                `time` = #{time,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -80,10 +80,10 @@
         update score_info
         set score_id = #{scoreId,jdbcType=INTEGER},
         detail = #{detail,jdbcType=VARCHAR},
-        `time` = #{time,jdbcType=VARCHAR}
+        `time` = #{time,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <!--根据用户表id查询优惠券和商品by杨思源-->
+    <!--根据用户表id查询兑换记录,优惠券和商品by杨思源-->
     <select id="selectByuserscoreid" parameterType="UserScore" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
