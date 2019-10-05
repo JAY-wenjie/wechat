@@ -92,16 +92,19 @@ public class TestController {
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Constant.APPID + "&secret=" + Constant.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
         JSONObject jsonObject = HttpClientUtil.doGet(url);
         System.out.println("通过获取的code从微信服务器获取的数据");//
-        //根据通过code获取到的access_token 和 openid获取用户信息
-        String url2 = "https://api.weixin.qq.com/sns/userinfo?access_token=" + jsonObject.get("access_token").toString() + "&openid=" + jsonObject.get("openid") + "&lang=zh_CN";
-        JSONObject jsonObject1 = HttpClientUtil.doGet(url2);
-        System.out.println("用户数据：" + jsonObject1);
-        //将获取到的json转换为wxUser对象
-        WxUser wxUser = new Gson().fromJson(jsonObject1.toString(), WxUser.class);
-        wxUser = wxUserService.autoInserWxUser(wxUser);//用户信息入库
-        System.out.println("用户数据入库后返回的用户数据：" + wxUser.toString());
-        session.setAttribute("wxUser", wxUser);//将获取的用户id存入session
-        return jsonObject1;
+        if(session.getAttribute("wxUser")==null){
+            //根据通过code获取到的access_token 和 openid获取用户信息
+            String url2 = "https://api.weixin.qq.com/sns/userinfo?access_token=" + jsonObject.get("access_token").toString() + "&openid=" + jsonObject.get("openid") + "&lang=zh_CN";
+            JSONObject jsonObject1 = HttpClientUtil.doGet(url2);
+            System.out.println("用户数据：" + jsonObject1);
+            //将获取到的json转换为wxUser对象
+            WxUser wxUser = new Gson().fromJson(jsonObject1.toString(), WxUser.class);
+            wxUser = wxUserService.autoInserWxUser(wxUser);//用户信息入库
+            System.out.println("用户数据入库后返回的用户数据：" + wxUser.toString());
+            session.setAttribute("wxUser", wxUser);//将获取的用户id存入session
+        }
+
+        return null;
     }
 
     /**
