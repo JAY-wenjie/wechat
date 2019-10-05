@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TestController2 {
@@ -31,11 +33,15 @@ public class TestController2 {
      * 如果用户之前从未签到过则先建立用户积分表by杨思源
      */
     @RequestMapping(value = "userScore")
-    public String userScore(HttpSession httpSession) {
+    public Map<String,Object> userScore(HttpSession httpSession) {
         WxUser wxUser = new WxUser();
-        wxUser.setId(1);
+        wxUser.setId(6);
         UserScore userScore = usereScoreService.selectByUserId(wxUser);
-        return userScore.toString();
+        Map<String,Object> map=new HashMap<>();
+        map.put("username","123");
+        map.put("score",userScore.getScore());
+        map.put("days",userScore.getDays());
+        return map;
     }
 
     /**
@@ -43,11 +49,11 @@ public class TestController2 {
      * by杨思源
      */
     @RequestMapping(value = "userSign")
-    public String userSign(HttpSession httpSession) {
+    public boolean userSign(HttpSession httpSession) {
         WxUser wxUser = new WxUser();
-        wxUser.setId(1);
-        UserScore userScore = usereScoreService.userSign(wxUser);
-        return userScore.toString();
+        wxUser.setId(6);
+        boolean flag = usereScoreService.userSign(wxUser);
+        return flag;
     }
 
     /**
@@ -55,9 +61,9 @@ public class TestController2 {
      * by杨思源
      */
     @RequestMapping(value = "coupons")
-    public String coupons() {
+    public List<DiscountCoupon> coupons() {
         List<DiscountCoupon> discountCoupons = discountCouponService.selectAll();
-        return discountCoupons.toString();
+        return discountCoupons;
     }
 
     /**
