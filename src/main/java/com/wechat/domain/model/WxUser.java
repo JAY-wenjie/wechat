@@ -2,6 +2,7 @@ package com.wechat.domain.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class WxUser {
     private Integer id;
@@ -71,6 +72,32 @@ public class WxUser {
      * 分组
      */
     private String groupid;
+    /**
+     * 用户积分
+     */
+    private  int score;
+
+    /**
+     * 用户积分信息收入花费详情
+     */
+    private List<ScoreInfo> scoreInfoList;
+
+
+    public List<ScoreInfo> getScoreInfoList() {
+        return scoreInfoList;
+    }
+
+    public void setScoreInfoList(List<ScoreInfo> scoreInfoList) {
+        this.scoreInfoList = scoreInfoList;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public Integer getId() {
         return id;
@@ -158,6 +185,10 @@ public class WxUser {
         return subscribetime;
     }
 
+    /**
+     * 设置入库出库格式
+     * @param subscribetime
+     */
     public void setSubscribetime(Date subscribetime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String createTime = sdf.format(subscribetime);

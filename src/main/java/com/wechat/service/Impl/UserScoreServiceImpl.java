@@ -95,7 +95,7 @@ public class UserScoreServiceImpl implements UsereScoreService {
             //对用户积分表进行更新
             userScoreMapper.updateUserScore(userScore1);
             //积分详情表赋值
-            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "每日签到奖励10积分", date);
+            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "每日签到奖励10积分",date.toString());
             //积分详情表增加这次操作
             scoreInfoMapper.insert(scoreInfo);
         } else {
@@ -104,7 +104,8 @@ public class UserScoreServiceImpl implements UsereScoreService {
             //对用户积分表进行更新
             userScoreMapper.updateUserScore(userScore1);
             //积分详情表赋值
-            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "每日签到奖励10积分", date);
+            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "每日签到奖励10积分",date.toString());
+            scoreInfo.setTime(date);
             //积分详情表增加这次操作
             scoreInfoMapper.insert(scoreInfo);
         }

@@ -1,5 +1,6 @@
 package com.wechat.domain.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -25,7 +26,7 @@ public class ScoreInfo {
     /**
      * 操作时间
      */
-    private Date time;
+    private String time;
 
     public Integer getId() {
         return id;
@@ -51,22 +52,31 @@ public class ScoreInfo {
         this.detail = detail;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
 
     public ScoreInfo() {
+
     }
 
-    public ScoreInfo(Integer scoreId, String detail, Date time) {
+    public ScoreInfo(Integer scoreId, String detail, String time) {
         this.scoreId = scoreId;
         this.detail = detail;
         this.time = time;
     }
+    public String getTime() {
+        return time;
+    }
+
+    /**
+     * 时间格式处理
+     * @param time
+     */
+    public void setTime(Date time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sdfTime = sdf.format(time);
+        this.time = sdfTime;
+    }
+
+
 
     @Override
     public String toString() {

@@ -34,4 +34,16 @@ public class ScoreInfoServiceImpl implements ScoreInfoService {
         List<ScoreInfo> scoreInfos = scoreInfoMapper.selectByuserscoreid(userScore);
         return scoreInfos;
     }
+
+    /**
+     * 根据score_id查询所有积分收入支出明细
+     * @param id
+     * @return
+     * @autor 文杰
+     */
+    @Override
+    public List<ScoreInfo> selectByScoreId(Integer id) {
+
+        return scoreInfoMapper.selectByScoreId(id);
+    }
 }

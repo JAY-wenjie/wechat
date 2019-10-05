@@ -19,6 +19,7 @@
         from score_info
         where id = #{id,jdbcType=INTEGER}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         <!--@mbg.generated-->
         delete from score_info
@@ -88,5 +89,13 @@
         select
         <include refid="Base_Column_List"/>
         from score_info where score_id=#{id} and detail like CONCAT('%','兑换','%')
+    </select>
+    <!--根据score_id查询所有积分收入支出明细 文杰-->
+    <select id="selectByScoreId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from score_info
+        where score_id = #{id,jdbcType=INTEGER}
     </select>
 </mapper>
