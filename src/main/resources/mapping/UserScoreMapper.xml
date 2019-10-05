@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.domain.mapper.UserScoreMapper">
+    <resultMap id="BaseResultMap" type="com.wechat.domain.model.UserScore">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+        <result column="days" jdbcType="INTEGER" property="days"/>
+        <result column="last_sign" jdbcType="DATE" property="lastSign"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, user_id, score, `days`, last_sign
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from user_score
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from user_score
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.UserScore"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into user_score (user_id, score, `days`,
+        last_sign)
+        values (#{userId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{days,jdbcType=INTEGER},
+        #{lastSign,jdbcType=DATE})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.UserScore"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into user_score
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="days != null">
+                `days`,
+            </if>
+            <if test="lastSign != null">
+                last_sign,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="days != null">
+                #{days,jdbcType=INTEGER},
+            </if>
+            <if test="lastSign != null">
+                #{lastSign,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.UserScore">
+        <!--@mbg.generated-->
+        update user_score
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=INTEGER},
+            </if>
+            <if test="days != null">
+                `days` = #{days,jdbcType=INTEGER},
+            </if>
+            <if test="lastSign != null">
+                last_sign = #{lastSign,jdbcType=DATE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.UserScore">
+        <!--@mbg.generated-->
+        update user_score
+        set user_id = #{userId,jdbcType=INTEGER},
+        score = #{score,jdbcType=INTEGER},
+        `days` = #{days,jdbcType=INTEGER},
+        last_sign = #{lastSign,jdbcType=DATE}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--根据用户id查询用户积分表by杨思源-->
+    <select id="selectByUserId" parameterType="WxUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_score where user_id = #{id}
+    </select>
+    <!--根据用户id建立用户的积分表by杨思源-->
+    <insert id="insertUserScore" parameterType="WxUser">
+        insert into user_score(user_id)
+        values(#{id})
+    </insert>
+    <!--用户签到,修改用户积分表by杨思源-->
+    <update id="updateUserScore" parameterType="UserScore">
+        update user_score
+        set score = score + 5,
+        <if test="days != null">
+            `days` = days+1,
+        </if>
+        <if test="days == null">
+            `days` = 1,
+        </if>
+        last_sign=#{lastSign,jdbcType=DATE}
+        where user_id = #{userId}
+    </update>
+    <!--用户连续签到数归0-->
+    <update id="updateUserScoredays" parameterType="WxUser">
+        update user_score
+        set `days` = 0
+        where user_id = #{id}
+    </update>
+    <!--用户积分减少-->
+    <update id="reduceUserScores" parameterType="UserScore">
+        update user_score
+        set score=score-#{score}
+        where user_id = #{userId}
+    </update>
+</mapper>
