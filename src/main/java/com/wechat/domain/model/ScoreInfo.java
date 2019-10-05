@@ -1,12 +1,5 @@
 package com.wechat.domain.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-/**
- * @author:杨思源
- * @Date:
- */
 public class ScoreInfo {
     /**
      * 积分详情表id
@@ -14,7 +7,7 @@ public class ScoreInfo {
     private Integer id;
 
     /**
-     * 积分表id
+     * 用户积分表id
      */
     private Integer scoreId;
 
@@ -52,9 +45,12 @@ public class ScoreInfo {
         this.detail = detail;
     }
 
+    public String getTime() {
+        return time;
+    }
 
-    public ScoreInfo() {
-
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public ScoreInfo(Integer scoreId, String detail, String time) {
@@ -62,21 +58,6 @@ public class ScoreInfo {
         this.detail = detail;
         this.time = time;
     }
-    public String getTime() {
-        return time;
-    }
-
-    /**
-     * 时间格式处理
-     * @param time
-     */
-    public void setTime(Date time) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String sdfTime = sdf.format(time);
-        this.time = sdfTime;
-    }
-
-
 
     @Override
     public String toString() {
@@ -84,7 +65,7 @@ public class ScoreInfo {
                 "id=" + id +
                 ", scoreId=" + scoreId +
                 ", detail='" + detail + '\'' +
-                ", time=" + time +
+                ", time='" + time + '\'' +
                 '}';
     }
 }

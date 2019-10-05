@@ -9,6 +9,7 @@ import com.wechat.service.UserCouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -42,13 +43,15 @@ public class UserCouponServiceImpl implements UserCouponService {
             userCouponMapper.insert(userCoupon);
             //优惠券表中优惠券库存-1
             discountCouponMapper.reduceDiscountCoupon(discountCoupon);
+            //时间格式转换,精确到秒
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date();
             //用户积分减少
             UserScore userScore1 = new UserScore(userScore.getId(), userScore.getUserId(),
                     discountCoupon.getPayScore(), 1, date);
             userScoreMapper.reduceUserScores(userScore1);
             //用户积分详情表更新,记录这次兑换
-            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "用户兑换优惠券,积分-" + discountCoupon.getPayScore(),date.toString());
+            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "用户兑换优惠券,积分-" + discountCoupon.getPayScore(),dateFormat.format(date));
             scoreInfoMapper.insert(scoreInfo);
             //返回1表示成功领取
             System.out.println("您已成功领取优惠券");
