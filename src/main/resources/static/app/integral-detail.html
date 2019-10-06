@@ -16,9 +16,44 @@
     <link rel="stylesheet" type="text/css" href="css/loading.css"/>
 <script type="text/javascript">
 	$(window).load(function(){
-		$(".loading").addClass("loader-chanage")
-		$(".loading").fadeOut(300)
+		$(".loading").addClass("loader-chanage");
+		$(".loading").fadeOut(300);
+		var id=location.href.split("=")[1];
+        $.ajax({
+            debug: true,
+            async: false,
+            type: "post",
+            url: "http://05ualz4.hn3.mofasuidao.cn/wechat/ScoreSpu.do",
+			data:{"id":id},
+			dataType:"json",
+            success: function (data) {
+                $(".tit").html(data.productName);
+                $("#score").html(data.socre);
+                $("#money").html(data.price+"元");
+                $(".last").html("库存"+data.sku+"件");
+            }
+        })
 	})
+	function duihuan() {
+        var id=location.href.split("=")[1];
+        $.ajax({
+            debug: true,
+            async: false,
+            type: "post",
+            url: "http://05ualz4.hn3.mofasuidao.cn/wechat/addgoods.do",
+            data:{"id":id},
+            dataType:"json",
+            success: function (data) {
+                if (data){
+                    alert("商品兑换成功!");
+					location.reload();
+				}else{
+                    alert("积分不足,兑换失败!");
+                    location.reload();
+				}
+            }
+        })
+    }
 </script>
 </head>
 <!--loading页开始-->
@@ -51,8 +86,8 @@
 	        </div>
 	        <div class="inte-top clearfloat box-s">
 	        	<div class="left clearfloat fl">
-	        		<p class="tit">夏季性感女装短裙女装</p>
-	        		<p class="price"><span>500</span>积分<samp>￥208元</samp></p>
+	        		<p class="tit"></p>
+	        		<p class="price"><span id="score"></span>积分<samp id="money"></samp></p>
 	        	</div>
 	        	<div class="right clearfloat fr">
 	        		<i class="iconfont icon-shoucang"></i>
@@ -65,7 +100,7 @@
 	        		<li class="fuhao"><i class="iconfont icon-jian"></i></li>
 	        		<li class="shu">1</li>
 	        		<li class="fuhao"><i class="iconfont icon-jia-copy"></i></li>
-	        		<li class="last">库存96件</li>
+	        		<li class="last"></li>
 	        	</ul>
 	        </div>
 	        <article class="detail-article">
@@ -176,7 +211,7 @@
 	     	<a href="#" class="shopcaradd fl">
 	     		加入购物车
 	     	</a>
-	     	<a href="#" class="ljdhuan fl">
+	     	<a href="#" class="ljdhuan fl" onclick="duihuan()">
 	     		立即兑换
 	     	</a>
 	    </footer>
