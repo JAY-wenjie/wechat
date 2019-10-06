@@ -82,6 +82,7 @@
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>RELEASE</version>
         </dependency>
+
         <!-- 分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>

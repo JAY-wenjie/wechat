@@ -1,5 +1,7 @@
 package com.wechat.domain.model;
 
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ScoreInfo {
@@ -21,7 +23,7 @@ public class ScoreInfo {
     /**
     * 操作时间
     */
-    private Date time;
+    private String time;
 
     public Integer getId() {
         return id;
@@ -47,19 +49,29 @@ public class ScoreInfo {
         this.detail = detail;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
+    /**
+     * 别再删了
+     * @param time
+     */
     public void setTime(Date time) {
-        this.time = time;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String ctime=sdf.format(time);
+        this.time = ctime;
     }
 
-    public ScoreInfo(Integer scoreId, String detail, Date time) {
+    public ScoreInfo() {
+    }
+
+    public ScoreInfo(Integer scoreId, String detail, String time) {
         this.scoreId = scoreId;
         this.detail = detail;
         this.time = time;
     }
+
 
     @Override
     public String toString() {
