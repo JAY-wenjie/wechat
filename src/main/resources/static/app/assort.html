@@ -30,7 +30,7 @@
                             }
 
                             for(var j=0;j<data.data[i].menu.length;j++) {
-                                b =b+ "<h3 class><em></em>" + data.data[i].menu[j].bname + "</h3>\n" +
+                                b =b+ "<h3 class onclick='javascript:b(this);'><em></em>" + data.data[i].menu[j].bname + "</h3>\n" +
                                     "<div class=\"slist clearfloat box-s\">";
                                 for (var n = 0; n < data.data[i].menu[j].spu.length; n++) {
                                     b =b+ "<div class=\"list clearfloat fl\">\n" +
@@ -47,6 +47,7 @@
                             $("#menu0").append(b);
                         }
                     }
+
                 }
             })
         })
@@ -55,7 +56,10 @@
             $(a).addClass('active');
             $("#"+id+"").siblings('section').css("display","none");
             $("#"+id+"").css("display","block");
-
+        }
+        function b(b) {
+            $(b).next().css("display","block");
+            $(b).siblings('h3').next().css("display","none");
         }
 	</script>
 	<link rel="stylesheet" type="text/css" href="css/base.css"/>
@@ -141,176 +145,6 @@
 
 			</ul>
 		</aside>
-
-		<section class="assort-cont clearfloat">
-			<div class="sideMenu clearfloat">
-				<h3><em></em>精品服装</h3>
-				<div class="slist clearfloat box-s">
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-				</div>
-				<h3><em></em>学生服装</h3>
-				<div class="slist clearfloat box-s">
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html?id=1">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-				</div>
-				<h3><em></em>精品童装</h3>
-				<div class="slist clearfloat box-s">
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-				</div>
-				<h3><em></em>精品男装</h3>
-				<div class="slist clearfloat box-s">
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-				</div>
-				<h3><em></em>金牌服装</h3>
-				<div class="slist clearfloat box-s">
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-					<div class="list clearfloat fl">
-						<a href="pro-detail.html">
-							<img src="upload/2.jpg"/>
-							<p class="tit">性感精品服装</p>
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
 	</div>
 </div>
 <footer class="page-footer fixed-footer" id="footer">
