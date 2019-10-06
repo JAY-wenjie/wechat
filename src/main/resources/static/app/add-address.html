@@ -6,7 +6,7 @@
     <title>添加新地址</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <script src="js/rem.js"></script> 
+    <script src="js/rem.js"></script>
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/base.css"/>
     <link rel="stylesheet" type="text/css" href="css/page.css"/>
@@ -14,87 +14,155 @@
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-<script type="text/javascript">
-	$(window).load(function(){
-		$(".loading").addClass("loader-chanage")
-		$(".loading").fadeOut(300)
-	})
-</script>
+    <link rel="stylesheet" type="text/css" href="css/style2.css"/>
+    <script src="http://libs.baidu.com/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $(".loading").addClass("loader-chanage");
+            $(".loading").fadeOut(300);
+            $("#save").click(function () {
+                var info = $("#expressArea dl dd").html();
+                var list = info.split("&gt;");
+                var name = $("#name").val();
+                var telephone = $("#telephone").val();
+                //alert(telephone);
+                var address = $("#address").val();
+                //alert(address);
+
+                if( $("#status").hasClass("toggle--off")){
+                    var status = 1;
+                }
+                if (list.length > 2) {
+                    var provinces = list[0];
+                    var cities = list[1];
+                    var areas = list[2];
+                } else {
+                    var provinces = list[0];
+                    var cities = list[0];
+                    var areas = list[1];
+                }
+                if (provinces == "省") {
+                    alert("请选择地址");
+                } else {
+                    $.ajax({
+                        url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/setaddress.do",
+                        type: "post",
+                        datatype: "json",
+                        data: {
+                            "provinces": provinces,
+                            "cities": cities,
+                            "provinces": provinces,
+                            "areas": areas,
+                            "name": name,
+                            "telephone": telephone,
+                            "address": address,
+                            "status":status
+                        },
+                        success: function (data) {
+                            if(data.code==0){
+                                alert("添加成功");
+                            }else {
+                                alert(data.msg);
+                            }
+
+                        }
+                    })
+                }
+            })
+        })
+    </script>
 </head>
 <!--loading页开始-->
 <div class="loading">
-	<div class="loader">
+    <div class="loader">
         <div class="loader-inner pacman">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-	</div>
+    </div>
 </div>
 <!--loading页结束-->
-	<body>
-		<header class="mui-bar mui-bar-nav report-header box-s" id="header">
-			<a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
-			<p>添加新地址</p>
-			<span class="fr baocun">保存</span>
-	    </header>
-	    <div id="main" class="mui-clearfix add-address">
-	    	<div class="plist clearfloat data">
-				<ul>
-					<li class="clearfloat">
-						<a href="#">
-							<p class="fl">收货人</p>
-							<input type="text" class="fr shuru" name="" id="" value="" placeholder="张三" />
-						</a>
-					</li>
-					<li class="clearfloat">
-						<a href="#">
-							<p class="fl">联系电话</p>
-							<i class="fr iconfont icon-tianjia"></i>
-						</a>
-					</li>
-					<li class="clearfloat">
-						<a href="#">
-							<p class="fl">所在地区</p>
-							<i class="fr iconfont icon-right icon-qianjin"></i>
-						</a>
-					</li>
-					<li class="clearfloat">
-						<a href="#">
-							<p class="fl">街道</p>
-							<i class="fr iconfont icon-right icon-qianjin"></i>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<textarea name="" rows="4" cols="" placeholder="请填写详细地址，不少于5个字" class="textare box-s"></textarea>
-	    	<div class="address-btn clearfloat">
-	    		<span class="szwmr fl">设为默认</span>
-	    		<a href="#" class="toggle toggle--on fr"></a>
-	    	</div>
-	    </div>
-	</body>
-	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-	<script src="js/fastclick.js"></script>
-	<script src="js/mui.min.js"></script>
-	<script type="text/javascript" src="js/hmt.js" ></script>
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<!--默认按钮-->
-	<script type="text/javascript">
-	$('.toggle').click(function(e){
-	
-		var toggle = this;
-		
-		e.preventDefault();
-	
-		$(toggle).toggleClass('toggle--on').toggleClass('toggle--off').addClass('toggle--moving');
-	
-		setTimeout(function(){
-			$(toggle).removeClass('toggle--moving');
-		}, 200)
-		
-	});
-	</script>
+<body>
+<header class="mui-bar mui-bar-nav report-header box-s" id="header">
+    <a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
+    <p>添加新地址</p>
+    <span class="fr baocun" id="save">保存</span>
+</header>
+<div id="main" class="mui-clearfix add-address">
+    <div class="plist clearfloat data browser">
+        <ul>
+            <li class="clearfloat">
+                <a href="#">
+                    <p class="fl">收货人</p>
+                    <input type="text" name="" id="name" value=""/>
+                </a>
+            </li>
+            <li class="clearfloat">
+                <a href="#">
+                    <p class="fl">联系电话</p>
+                    <input type="text" id="telephone" style="display: inline-block">
+                </a>
+            </li>
+            <!--选择地区-->
+            <section class="express-area">
+                <a id="expressArea" href="javascript:void(0)">
+                    <dl>
+                        <dt>选择地区：</dt>
+                        <dd>省 > 市 > 区/县</dd>
+                    </dl>
+                </a>
+            </section>
+            <!--选择地区弹层-->
+            <section id="areaLayer" class="express-area-box">
+                <header>
+                    <h3>选择地区</h3>
+                    <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
+                    <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+                </header>
+                <article id="areaBox">
+                    <ul id="areaList" class="area-list"></ul>
+                </article>
+            </section>
+            <!--遮罩层-->
+            <div id="areaMask" class="mask"></div>
+            <!--<li class="clearfloat">-->
+            <!--<a href="#">-->
+            <!--<p class="fl">街道</p>-->
+            <!--<i class="fr iconfont icon-right icon-qianjin"></i>-->
+            <!--</a>-->
+            <!--</li>-->
+        </ul>
+    </div>
+    <textarea id="address" name="" rows="4" cols="" placeholder="请填写详细地址，不少于5个字" class="textare box-s"></textarea>
+    <div class="address-btn clearfloat">
+        <span class="szwmr fl">设为默认</span>
+        <a href="#" id="status" class="toggle toggle--on fr"></a>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="js/mui.min.js"></script>
+<script type="text/javascript" src="js/hmt.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/jquery.area.js"></script>
+<!--默认按钮-->
+<script type="text/javascript">
+    $('.toggle').click(function (e) {
+
+        var toggle = this;
+
+        e.preventDefault();
+
+        $(toggle).toggleClass('toggle--on').toggleClass('toggle--off').addClass('toggle--moving');
+
+        setTimeout(function () {
+            $(toggle).removeClass('toggle--moving');
+        }, 200)
+
+    });
+</script>
 </html>

@@ -16,9 +16,96 @@
     <link rel="stylesheet" type="text/css" href="css/loading.css"/>
 <script type="text/javascript">
 	$(window).load(function(){
-		$(".loading").addClass("loader-chanage")
-		$(".loading").fadeOut(300)
-	})
+		$(".loading").addClass("loader-chanage");
+		$(".loading").fadeOut(300);
+        $.ajax({
+            type: "post",
+            datatype: "json",
+            url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/getaddress.do",
+            success: function (data) {
+                if (data.code == 0) {
+                    var addressList = data.data;
+                    for(i=0;i<addressList.length;i++){
+                        var address = addressList[i];
+                        if(address.status==1){
+                            var str = "   <div id=\"main\" class=\"mui-clearfix contaniner\">\n" +
+                                "\t    \t<div class=\"addlist clearfloat\">\n" +
+                                "\t    \t\t<div class=\"top clearfloat box-s\">\n" +
+                                "\t    \t\t\t<ul>\n" +
+                                "\t    \t\t\t\t<li>\n" +
+                                "\t    \t\t\t\t\t<span class=\"fl\">"+address.name+"</span>\n" +
+                                "\t    \t\t\t\t\t<span class=\"fr\">"+address.telephone+"</span>\n" +
+                                "\t    \t\t\t\t</li>\n" +
+                                "\t    \t\t\t\t<li>\n" +
+                                "\t    \t\t\t\t\t"+address.address+"\n" +
+                                "\t    \t\t\t\t</li>\n" +
+                                "\t    \t\t\t</ul>\n" +
+                                "\t    \t\t</div>\n" +
+                                "\t    \t\t<div class=\"bottom clearfloat box-s\">\n" +
+                                "\t    \t\t\t<section class=\"shopcar clearfloat\">\n" +
+                                "\t\t\t\t\t\t<div class=\"shopcar-checkbox fl\">\n" +
+                                "\t\t\t\t\t\t\t<label for=\"shopcar\" onselectstart=\"return false\" class=\"shopcar-checkd\"></label>\n" +
+                                "\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"shopcar\"/>\n" +
+                                "\t\t\t\t\t\t</div>\n" +
+                                "\t\t\t\t\t\t<span class=\"mradd fl\">默认地址</span>\n" +
+                                "\t\t\t\t\t\t<div class=\"right fr clearfloat\">\n" +
+                                "\t\t\t\t\t\t\t<a href=\"#\" class=\"fr\">\n" +
+                                "\t\t\t\t\t\t\t\t<i class=\"iconfont icon-shanchu icon-shanchutwo\"></i>\n" +
+                                "\t\t\t\t\t\t\t\t删除\n" +
+                                "\t\t\t\t\t\t\t</a>\n" +
+                                "\t\t\t\t\t\t\t<a href=\"#\" class=\"fr\">\n" +
+                                "\t\t\t\t\t\t\t\t<i class=\"iconfont icon-bianji bianjittt\"></i>\n" +
+                                "\t\t\t\t\t\t\t\t编辑\n" +
+                                "\t\t\t\t\t\t\t</a>\t\t\t\t\t\t\t\n" +
+                                "\t\t\t\t\t\t</div>\n" +
+                                "\t\t\t\t\t</section>\n" +
+                                "\t    \t\t</div>\n" +
+                                "\t    \t</div>";
+                            $("#main").append(str);
+						}else {
+							var str = "\t<div class=\"addlist clearfloat\">\n" +
+                                "\t    \t\t<div class=\"top clearfloat box-s\">\n" +
+                                "\t    \t\t\t<ul>\n" +
+                                "\t    \t\t\t\t<li>\n" +
+                                "\t    \t\t\t\t\t<span class=\"fl\">"+address.name+"</span>\n" +
+                                "\t    \t\t\t\t\t<span class=\"fr\">"+address.telephone+"</span>\n" +
+                                "\t    \t\t\t\t</li>\n" +
+                                "\t    \t\t\t\t<li>\n" +
+                                "\t    \t\t\t\t\t"+address.address+"\n" +
+                                "\t    \t\t\t\t</li>\n" +
+                                "\t    \t\t\t</ul>\n" +
+                                "\t    \t\t</div>\n" +
+                                "\t    \t\t<div class=\"bottom clearfloat box-s\">\n" +
+                                "\t    \t\t\t<section class=\"shopcar clearfloat\">\n" +
+                                "\t\t\t\t\t\t<div class=\"shopcar-checkbox fl\">\n" +
+                                "\t\t\t\t\t\t\t<label for=\"shopcar\" onselectstart=\"return false\"></label>\n" +
+                                "\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"shopcar\"/>\n" +
+                                "\t\t\t\t\t\t</div>\n" +
+                                "\t\t\t\t\t\t<span class=\"mradd smradd fl\">设为默认</span>\n" +
+                                "\t\t\t\t\t\t<div class=\"right fr clearfloat\">\n" +
+                                "\t\t\t\t\t\t\t<a href=\"#\" class=\"fr\">\n" +
+                                "\t\t\t\t\t\t\t\t<i class=\"iconfont icon-shanchu icon-shanchutwo\"></i>\n" +
+                                "\t\t\t\t\t\t\t\t删除\n" +
+                                "\t\t\t\t\t\t\t</a>\n" +
+                                "\t\t\t\t\t\t\t<a href=\"#\" class=\"fr\">\n" +
+                                "\t\t\t\t\t\t\t\t<i class=\"iconfont icon-bianji bianjittt\"></i>\n" +
+                                "\t\t\t\t\t\t\t\t编辑\n" +
+                                "\t\t\t\t\t\t\t</a>\t\t\t\t\t\t\t\n" +
+                                "\t\t\t\t\t\t</div>\n" +
+                                "\t\t\t\t\t</section>\n" +
+                                "\t    \t\t</div>\n" +
+                                "\t    \t</div>";
+							//alert(str);
+                            $("#main").append(str);
+						}
+					}
+                }else {
+                    alert(data.data.msg);
+                }
+            }
+        })
+
+    })
 </script>
 </head>
 <!--loading页开始-->
@@ -39,105 +126,10 @@
 			<a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
 			<p>管理收货地址</p>
 	    </header>
+		<div id="adddressBox"></div>
 	    <div id="main" class="mui-clearfix contaniner">
-	    	<div class="addlist clearfloat">
-	    		<div class="top clearfloat box-s">
-	    			<ul>
-	    				<li>
-	    					<span class="fl">张三</span>
-	    					<span class="fr">1355555****</span>
-	    				</li>
-	    				<li>
-	    					北京市朝阳区XXXXXXXXXXXXXXXXXXXXXXX
-	    				</li>
-	    			</ul>
-	    		</div>
-	    		<div class="bottom clearfloat box-s">
-	    			<section class="shopcar clearfloat">
-						<div class="shopcar-checkbox fl">
-							<label for="shopcar" onselectstart="return false" class="shopcar-checkd"></label>
-							<input type="checkbox" id="shopcar"/>
-						</div>
-						<span class="mradd fl">默认地址</span>
-						<div class="right fr clearfloat">
-							<a href="#" class="fr">
-								<i class="iconfont icon-shanchu icon-shanchutwo"></i>
-								删除
-							</a>
-							<a href="#" class="fr">
-								<i class="iconfont icon-bianji bianjittt"></i>
-								编辑
-							</a>							
-						</div>
-					</section>
-	    		</div>
-	    	</div>
-	    	
-	    	<div class="addlist clearfloat">
-	    		<div class="top clearfloat box-s">
-	    			<ul>
-	    				<li>
-	    					<span class="fl">张三</span>
-	    					<span class="fr">1355555****</span>
-	    				</li>
-	    				<li>
-	    					北京市朝阳区XXXXXXXXXXXXXXXXXXXXXXX
-	    				</li>
-	    			</ul>
-	    		</div>
-	    		<div class="bottom clearfloat box-s">
-	    			<section class="shopcar clearfloat">
-						<div class="shopcar-checkbox fl">
-							<label for="shopcar" onselectstart="return false"></label>
-							<input type="checkbox" id="shopcar"/>
-						</div>
-						<span class="mradd smradd fl">设为默认</span>
-						<div class="right fr clearfloat">
-							<a href="#" class="fr">
-								<i class="iconfont icon-shanchu icon-shanchutwo"></i>
-								删除
-							</a>
-							<a href="#" class="fr">
-								<i class="iconfont icon-bianji bianjittt"></i>
-								编辑
-							</a>							
-						</div>
-					</section>
-	    		</div>
-	    	</div>
-	    	
-	    	<div class="addlist clearfloat">
-	    		<div class="top clearfloat box-s">
-	    			<ul>
-	    				<li>
-	    					<span class="fl">张三</span>
-	    					<span class="fr">1355555****</span>
-	    				</li>
-	    				<li>
-	    					北京市朝阳区XXXXXXXXXXXXXXXXXXXXXXX
-	    				</li>
-	    			</ul>
-	    		</div>
-	    		<div class="bottom clearfloat box-s">
-	    			<section class="shopcar clearfloat">
-						<div class="shopcar-checkbox fl">
-							<label for="shopcar" onselectstart="return false"></label>
-							<input type="checkbox" id="shopcar"/>
-						</div>
-						<span class="mradd smradd fl">设为默认</span>
-						<div class="right fr clearfloat">
-							<a href="#" class="fr">
-								<i class="iconfont icon-shanchu icon-shanchutwo"></i>
-								删除
-							</a>
-							<a href="#" class="fr">
-								<i class="iconfont icon-bianji bianjittt"></i>
-								编辑
-							</a>							
-						</div>
-					</section>
-	    		</div>
-	    	</div>
+
+
 	    	
 	    </div>
 	    

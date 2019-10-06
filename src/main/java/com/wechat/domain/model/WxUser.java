@@ -81,7 +81,18 @@ public class WxUser {
      * 用户积分信息收入花费详情
      */
     private List<ScoreInfo> scoreInfoList;
+    /**
+     * 账户余额 单位：分
+     */
+    private int money;
 
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
 
     public List<ScoreInfo> getScoreInfoList() {
         return scoreInfoList;
@@ -236,6 +247,7 @@ public class WxUser {
                 ", unionid='" + unionid + '\'' +
                 ", remark='" + remark + '\'' +
                 ", groupid='" + groupid + '\'' +
+                ", money='" + money + '\'' +
                 '}';
     }
 }

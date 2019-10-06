@@ -18,29 +18,28 @@
 	$(window).load(function(){
 		$(".loading").addClass("loader-chanage");
 		$(".loading").fadeOut(300);
+		alert("adad");
         $.ajax({
             type: "post",
             datatype: "json",
             url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/showpersoninfo.do",
             success: function (data) {
                 if (data.code == 0) {
-
                     var scoreInfoList = data.data.scoreInfoList;
                     if(scoreInfoList!=null){
                         for (i=0;i<scoreInfoList.length;i++){
-                            alert("aa")
                             var str = "<li class=\"clearfloat\">\n" +
                                 "\t    \t\t\t\t<span class=\"fl tit\">"+scoreInfoList[i].detail+"</span>\n" +
                                 "\t    \t\t\t\t<span class=\"fr time\">"+scoreInfoList[i].time+"</span>\n" +
                                 "\t    \t\t\t</li>";
-                            $("#scoreInfoBox").appendChild(str);
-                            alert("success")
+                            $("#scoreInfoBox").append(str);
+
                         }
 					}else{
                         var str = "<li class=\"clearfloat\">\n" +
                             "\t    \t\t\t\t<span class=\"fl tit\">您还没有积分消费记录</span>\n" +
                             "\t    \t\t\t</li>";
-                        $("#scoreInfoBox").appendChild(str);
+                        $("#scoreInfoBox").append(str);
 					}
 
                 }else {
