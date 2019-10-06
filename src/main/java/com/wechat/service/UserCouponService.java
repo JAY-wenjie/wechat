@@ -1,7 +1,10 @@
 package com.wechat.service;
 
 import com.wechat.domain.model.DiscountCoupon;
+import com.wechat.domain.model.ScoreInfo;
 import com.wechat.domain.model.WxUser;
+
+import java.util.List;
 
 /**
  * @author:杨思源

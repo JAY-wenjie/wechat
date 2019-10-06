@@ -16,8 +16,38 @@
     <link rel="stylesheet" type="text/css" href="css/loading.css"/>
 <script type="text/javascript">
 	$(window).load(function(){
-		$(".loading").addClass("loader-chanage")
-		$(".loading").fadeOut(300)
+		$(".loading").addClass("loader-chanage");
+		$(".loading").fadeOut(300);
+        $.ajax({
+            type: "post",
+            datatype: "json",
+            url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/showpersoninfo.do",
+            success: function (data) {
+                if (data.code == 0) {
+
+                    var scoreInfoList = data.data.scoreInfoList;
+                    if(scoreInfoList!=null){
+                        for (i=0;i<scoreInfoList.length;i++){
+                            alert("aa")
+                            var str = "<li class=\"clearfloat\">\n" +
+                                "\t    \t\t\t\t<span class=\"fl tit\">"+scoreInfoList[i].detail+"</span>\n" +
+                                "\t    \t\t\t\t<span class=\"fr time\">"+scoreInfoList[i].time+"</span>\n" +
+                                "\t    \t\t\t</li>";
+                            $("#scoreInfoBox").appendChild(str);
+                            alert("success")
+                        }
+					}else{
+                        var str = "<li class=\"clearfloat\">\n" +
+                            "\t    \t\t\t\t<span class=\"fl tit\">您还没有积分消费记录</span>\n" +
+                            "\t    \t\t\t</li>";
+                        $("#scoreInfoBox").appendChild(str);
+					}
+
+                }else {
+                    alert(data.data.msg);
+                }
+            }
+        })
 	})
 </script>
 </head>
@@ -47,16 +77,10 @@
 	    			<li class="clearfloat"><a href="#">支出记录</a></li>
 	    		</ul>
 	    	</div>
+			<!--积分记录-->
 	    	<div class="profit clearfloat">
-	    		<ul>
-	    			<li class="clearfloat">
-	    				<span class="fl tit">每日签到奖励10积分</span>
-	    				<span class="fr time">2016-04-08&nbsp;&nbsp;11:00</span>
-	    			</li>
-	    			<li class="clearfloat">
-	    				<span class="fl tit">新用户注册奖励10积分</span>
-	    				<span class="fr time">2016-04-08&nbsp;&nbsp;11:00</span>
-	    			</li>
+	    		<ul id="scoreInfoBox">
+
 	    		</ul>
 	    	</div>
 	    </div>

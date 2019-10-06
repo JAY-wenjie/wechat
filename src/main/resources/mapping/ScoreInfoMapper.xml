@@ -1,84 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wechat.domain.mapper.ScoreInfoMapper">
-  <resultMap id="BaseResultMap" type="com.wechat.domain.model.ScoreInfo">
-    <!--@mbg.generated-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="score_id" jdbcType="INTEGER" property="scoreId" />
-    <result column="detail" jdbcType="VARCHAR" property="detail" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, score_id, detail, `time`
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from score_info
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    <!--@mbg.generated-->
-    delete from score_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.ScoreInfo" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into score_info (score_id, detail, `time`
-      )
-    values (#{scoreId,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.ScoreInfo" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into score_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="scoreId != null">
-        score_id,
-      </if>
-      <if test="detail != null">
-        detail,
-      </if>
-      <if test="time != null">
-        `time`,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="scoreId != null">
-        #{scoreId,jdbcType=INTEGER},
-      </if>
-      <if test="detail != null">
-        #{detail,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.ScoreInfo">
-    <!--@mbg.generated-->
-    update score_info
-    <set>
-      <if test="scoreId != null">
-        score_id = #{scoreId,jdbcType=INTEGER},
-      </if>
-      <if test="detail != null">
+    <resultMap id="BaseResultMap" type="com.wechat.domain.model.ScoreInfo">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="score_id" jdbcType="INTEGER" property="scoreId"/>
+        <result column="detail" jdbcType="VARCHAR" property="detail"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, score_id, detail, `time`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from score_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from score_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.ScoreInfo"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into score_info (score_id, detail, `time`
+        )
+        values (#{scoreId,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.ScoreInfo"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into score_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="scoreId != null">
+                score_id,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="scoreId != null">
+                #{scoreId,jdbcType=INTEGER},
+            </if>
+            <if test="detail != null">
+                #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.ScoreInfo">
+        <!--@mbg.generated-->
+        update score_info
+        <set>
+            <if test="scoreId != null">
+                score_id = #{scoreId,jdbcType=INTEGER},
+            </if>
+            <if test="detail != null">
+                detail = #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.ScoreInfo">
+        <!--@mbg.generated-->
+        update score_info
+        set score_id = #{scoreId,jdbcType=INTEGER},
         detail = #{detail,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        `time` = #{time,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.ScoreInfo">
-    <!--@mbg.generated-->
-    update score_info
-    set score_id = #{scoreId,jdbcType=INTEGER},
-      detail = #{detail,jdbcType=VARCHAR},
-      `time` = #{time,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        `time` = #{time,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--根据用户表id查询兑换记录,优惠券和商品by杨思源-->
+    <select id="selectByuserscoreid" parameterType="UserScore" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from score_info where score_id=#{id} and detail like CONCAT('%','兑换','%')
+    </select>
+    <!--根据score_id查询所有积分收入支出明细 文杰-->
+    <select id="selectByScoreId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from score_info
+        where score_id = #{id,jdbcType=INTEGER}
+    </select>
 </mapper>

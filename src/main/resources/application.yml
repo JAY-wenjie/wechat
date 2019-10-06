@@ -7,6 +7,9 @@ spring:
     url: jdbc:mysql://123.56.47.145:3306/shopdb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&&autoReconnect=true&rewriteBatchedStatements=TRUE
     username: root
     password: Root123456.
+#    thymeleaf模板
+  thymeleaf:
+    mode:HTML5
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.wechat.domain.model

@@ -1,10 +1,6 @@
 package com.wechat.commons;
 
-/**
- * @author CHENCHEN
- * @company XJA
- * @create 2019-09-21 14:34
- */
+
 public class JsonBean {
     private int code;
 
@@ -21,6 +17,14 @@ public class JsonBean {
         this.msg = msg;
     }
 
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
     public int getCode() {
         return code;
     }
@@ -29,13 +33,6 @@ public class JsonBean {
         this.code = code;
     }
 
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
 
     public String getMsg() {
         return msg;
