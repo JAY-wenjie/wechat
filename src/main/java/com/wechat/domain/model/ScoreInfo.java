@@ -1,7 +1,5 @@
 package com.wechat.domain.model;
 
-import javax.xml.crypto.Data;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ScoreInfo {
@@ -16,6 +14,11 @@ public class ScoreInfo {
     private Integer scoreId;
 
     /**
+    * 兑换的商品id
+    */
+    private Integer spuId;
+
+    /**
     * 操作详情
     */
     private String detail;
@@ -23,7 +26,7 @@ public class ScoreInfo {
     /**
     * 操作时间
     */
-    private String time;
+    private Date time;
 
     public Integer getId() {
         return id;
@@ -41,6 +44,14 @@ public class ScoreInfo {
         this.scoreId = scoreId;
     }
 
+    public Integer getSpuId() {
+        return spuId;
+    }
+
+    public void setSpuId(Integer spuId) {
+        this.spuId = spuId;
+    }
+
     public String getDetail() {
         return detail;
     }
@@ -49,35 +60,44 @@ public class ScoreInfo {
         this.detail = detail;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    /**
-     * 别再删了
-     * @param time
-     */
     public void setTime(Date time) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String ctime=sdf.format(time);
-        this.time = ctime;
+        this.time = time;
     }
 
     public ScoreInfo() {
     }
 
-    public ScoreInfo(Integer scoreId, String detail, String time) {
+    public ScoreInfo(Integer scoreId, String detail, Date time) {
         this.scoreId = scoreId;
         this.detail = detail;
         this.time = time;
     }
 
+    public ScoreInfo(Integer id, Integer scoreId, Integer spuId, String detail, Date time) {
+        this.id = id;
+        this.scoreId = scoreId;
+        this.spuId = spuId;
+        this.detail = detail;
+        this.time = time;
+    }
+
+    public ScoreInfo(Integer scoreId, Integer spuId, String detail, Date time) {
+        this.scoreId = scoreId;
+        this.spuId = spuId;
+        this.detail = detail;
+        this.time = time;
+    }
 
     @Override
     public String toString() {
         return "ScoreInfo{" +
                 "id=" + id +
                 ", scoreId=" + scoreId +
+                ", spuId=" + spuId +
                 ", detail='" + detail + '\'' +
                 ", time=" + time +
                 '}';

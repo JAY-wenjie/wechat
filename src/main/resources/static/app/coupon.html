@@ -36,34 +36,56 @@
         function showData(data) {
             var str = "";//定义用于拼接的字符串
             for (var i = 0; i < data.length; i++) {
+                var id=data.id;
+                var payScore=data.payScore;
                 //拼接表格的行和列
-                str = "<div id=\"coupons\">\n" +
-                    "            <div class=\"coupon-list clearfloat\">\n" +
+                str += "<div class=\"coupon-list clearfloat\">\n" +
                     "                <div class=\"list fl clearfloat\">\n" +
                     "                    <a href=\"integral.html\">\n" +
                     "                        <div class=\"left fl clearfloat\">\n" +
-                    "                            <span>"+data[i].discountPrice+"</span>元\n" +
+                    "                            <span>" + data[i].discountPrice + "</span>元\n" +
                     "                        </div>\n" +
                     "                        <div class=\"yhq fl clearfloat box-s\">\n" +
                     "                            <p class=\"tit fl clearfloat\">优惠券</p>\n" +
                     "                        </div>\n" +
                     "                        <div class=\"jifen clearfloat fl\">\n" +
-                    "                            "+data[i].payScore+"积分兑换\n" +
+                    "                            " + data[i].payScore + "积分兑换\n" +
                     "                            <span><img src=\"img/yhqright.png\"/></span>\n" +
                     "                        </div>\n" +
                     "                        <p class=\"goumsy clearfloat fl\">\n" +
-                    "                            满"+data[i].startPrice+"使用\n" +
+                    "                            满" + data[i].startPrice + "使用\n" +
                     "                        </p>\n" +
                     "                        <div class=\"yhq-right fr clearfloat ta-c\">\n" +
-                    "                            <p>立即<br/>兑换</p>\n" +
+                    "                            <p onclick='javascript:return duihuan("+data[i].id+","+data[i].payScore+")'>立即兑换<br/></p>\n" +
                     "                        </div>\n" +
                     "                    </a>\n" +
                     "                </div>\n" +
-                    "            </div>\n" +
-                    "        </div>";
-                //追加到table中
-                $("#coupons").append(str);
+                    "            </div>";
             }
+            //追加到table中
+            $("#coupons").append(str);
+        }
+
+        function duihuan(id,score) {
+            $.ajax({
+                debug: true,
+                type: "post",
+                url: "http://05ualz4.hn3.mofasuidao.cn/wechat/addcoupons.do",
+                async: false,
+                data: {"id":id,"score":score},
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        alert("领取成功!");
+                    } else {
+                        alert("积分不足,领取失败!");
+                    }
+                },
+                error: function (msg) {
+                    alert("错误信息:" + msg);
+                }
+            })
+            return false;
         }
     </script>
 </head>
@@ -90,26 +112,27 @@
         <!--优惠券-->
         <div id="coupons">
             <!--<div class="coupon-list clearfloat">-->
-                <!--<div class="list fl clearfloat">-->
-                    <!--<a href="integral.html">-->
-                        <!--<div class="left fl clearfloat">-->
-                            <!--<span>10</span>元-->
-                        <!--</div>-->
-                        <!--<div class="yhq fl clearfloat box-s">-->
-                            <!--<p class="tit fl clearfloat">优惠券</p>-->
-                        <!--</div>-->
-                        <!--<div class="jifen clearfloat fl">-->
-                            <!--50积分兑换-->
-                            <!--<span><img src="img/yhqright.png"/></span>-->
-                        <!--</div>-->
-                        <!--<p class="goumsy clearfloat fl">-->
-                            <!--满59使用-->
-                        <!--</p>-->
-                        <!--<div class="yhq-right fr clearfloat ta-c">-->
-                            <!--<p>立即<br/>兑换</p>-->
-                        <!--</div>-->
-                    <!--</a>-->
-                <!--</div>-->
+            <!--<input type="hidden" id="id" value=""><input type="hidden" id="socre" value="">-->
+            <!--<div class="list fl clearfloat">-->
+            <!--<a href="integral.html">-->
+            <!--<div class="left fl clearfloat">-->
+            <!--<span>10</span>元-->
+            <!--</div>-->
+            <!--<div class="yhq fl clearfloat box-s">-->
+            <!--<p class="tit fl clearfloat">优惠券</p>-->
+            <!--</div>-->
+            <!--<div class="jifen clearfloat fl">-->
+            <!--50积分兑换-->
+            <!--<span><img src="img/yhqright.png"/></span>-->
+            <!--</div>-->
+            <!--<p class="goumsy clearfloat fl">-->
+            <!--满59使用-->
+            <!--</p>-->
+            <!--<div class="yhq-right fr clearfloat ta-c">-->
+            <!--<p>立即<br/>兑换</p>-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</div>-->
             <!--</div>-->
         </div>
         <div class="coupon-ctent clearfloat">

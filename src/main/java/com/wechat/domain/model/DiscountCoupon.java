@@ -1,6 +1,7 @@
 package com.wechat.domain.model;
 
 import java.util.Date;
+
 /**
  * @author:杨思源
  * @Date:
@@ -105,6 +106,14 @@ public class DiscountCoupon {
 
     public void setCouponSku(Integer couponSku) {
         this.couponSku = couponSku;
+    }
+
+    public DiscountCoupon() {
+    }
+
+    public DiscountCoupon(Integer id, Integer payScore) {
+        this.id = id;
+        this.payScore = payScore;
     }
 
     @Override
