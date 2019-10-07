@@ -5,6 +5,9 @@ import javax.annotation.Resource;
 import com.wechat.domain.model.PoductSpu;
 import com.wechat.domain.mapper.PoductSpuMapper;
 import com.wechat.service.PoductSpuService;
+
+import java.util.List;
+
 @Service
 public class PoductSpuServiceImpl implements PoductSpuService{
 
@@ -39,6 +42,11 @@ public class PoductSpuServiceImpl implements PoductSpuService{
     @Override
     public int updateByPrimaryKey(PoductSpu record) {
         return poductSpuMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<PoductSpu> selectAllProductSpu() {
+        return poductSpuMapper.selectAllProductSpu();
     }
 
 }

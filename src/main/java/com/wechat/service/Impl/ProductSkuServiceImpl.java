@@ -7,6 +7,7 @@ import com.wechat.domain.mapper.ProductSkuMapper;
 import com.wechat.service.ProductSkuService;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductSkuServiceImpl implements ProductSkuService{
@@ -47,6 +48,16 @@ public class ProductSkuServiceImpl implements ProductSkuService{
     @Override
     public List<ProductSku> selectByStatus(int id) {
         return productSkuMapper.selectByStatus(id);
+    }
+
+    @Override
+    public Map<String, Object> selectSkuBySpuId(int spuId) {
+        return productSkuMapper.selectSkuBySpuId(spuId);
+    }
+
+    @Override
+    public List<Map<String,Object>> selectSkuImgById(int skuId) {
+        return productSkuMapper.selectSkuImgById(skuId);
     }
 
 }
