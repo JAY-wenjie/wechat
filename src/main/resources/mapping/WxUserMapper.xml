@@ -20,19 +20,16 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, openid, subscribe, nickname, sex, city, country, province, `language`,
-    headimgurl, subscribeTime, unionid, remark, groupid
+    id, openid, subscribe, nickname, sex, city, country, province, `language`, headimgurl, 
+    subscribeTime, unionid, remark, groupid
   </sql>
-  <select id="selectByPrimaryKey" parameterType="string" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from wx_user
-    where openid = #{openid,jdbcType=VARCHAR}
+    where openid = #{openid}
   </select>
-    <select id="selectFriendById" parameterType="com.wechat.domain.model.WxUser" resultMap="BaseResultMap">
-        select b.* from user_qrcode a inner join wx_user b on a.new_id = b.id and a.old_id = #{wxUser.id,jdbcType=INTEGER}
-    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from wx_user
@@ -41,12 +38,12 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.WxUser" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into wx_user (openid, subscribe, nickname, 
-      sex, city, country,
+      sex, city, country, 
       province, `language`, headimgurl, 
       subscribeTime, unionid, remark, 
       groupid)
     values (#{openid,jdbcType=VARCHAR}, #{subscribe,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR},
+      #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
       #{province,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, 
       #{subscribetime,jdbcType=TIMESTAMP}, #{unionid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{groupid,jdbcType=VARCHAR})
@@ -137,7 +134,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.WxUser" useGeneratedKeys="true" keyProperty="id">
+  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.WxUser">
     <!--@mbg.generated-->
     update wx_user
     <set>
@@ -181,7 +178,7 @@
         groupid = #{groupid,jdbcType=VARCHAR},
       </if>
     </set>
-    where openid = #{openid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.WxUser">
     <!--@mbg.generated-->
@@ -201,5 +198,8 @@
       groupid = #{groupid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectFriendById" parameterType="com.wechat.domain.model.WxUser" resultMap="BaseResultMap">
+        select b.* from user_qrcode a inner join wx_user b on a.new_id = b.id and a.old_id = #{wxUser.id,jdbcType=INTEGER}
+    </select>
 
 </mapper>

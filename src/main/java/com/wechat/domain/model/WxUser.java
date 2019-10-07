@@ -1,6 +1,5 @@
 package com.wechat.domain.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WxUser {
@@ -31,7 +30,6 @@ public class WxUser {
      */
     private String city;
 
-
     /**
      * 国家
      */
@@ -55,7 +53,7 @@ public class WxUser {
     /**
      * 关注时间
      */
-    private String subscribetime;
+    private Date subscribetime;
 
     /**
      * 多个公众号用户唯一标识
@@ -120,7 +118,6 @@ public class WxUser {
         this.city = city;
     }
 
-
     public String getCountry() {
         return country;
     }
@@ -153,15 +150,12 @@ public class WxUser {
         this.headimgurl = headimgurl;
     }
 
-
-    public String getSubscribetime() {
+    public Date getSubscribetime() {
         return subscribetime;
     }
 
     public void setSubscribetime(Date subscribetime) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String createTime = sdf.format(subscribetime);
-        this.subscribetime = createTime;
+        this.subscribetime = subscribetime;
     }
 
     public String getUnionid() {
@@ -186,25 +180,5 @@ public class WxUser {
 
     public void setGroupid(String groupid) {
         this.groupid = groupid;
-    }
-
-    @Override
-    public String toString() {
-        return "WxUser{" +
-                "id=" + id +
-                ", openid='" + openid + '\'' +
-                ", subscribe=" + subscribe +
-                ", nickname='" + nickname + '\'' +
-                ", sex=" + sex +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", province='" + province + '\'' +
-                ", language='" + language + '\'' +
-                ", headimgurl='" + headimgurl + '\'' +
-                ", subscribetime=" + subscribetime +
-                ", unionid='" + unionid + '\'' +
-                ", remark='" + remark + '\'' +
-                ", groupid='" + groupid + '\'' +
-                '}';
     }
 }

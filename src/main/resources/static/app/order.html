@@ -18,6 +18,79 @@
 	$(window).load(function(){
 		$(".loading").addClass("loader-chanage")
 		$(".loading").fadeOut(300)
+
+$.ajax({
+	type: "post",
+    debug: true,
+
+	url: "http://localhost:8080/wechat/selOrderInfo.do",
+    dataType: "json",
+	success:function (data) {
+	    alert("进入order");
+	    alert(data.data.listinfo);
+	    alert(data.data.listinfo.length);
+	    for (var i=0;i<data.data.listinfo.length;i++){
+				alert(data.data.skuList[i].status);
+	        if (data.data.skuList[i].status==1){
+	            alert("等于1");
+             //   var num="<span class\"ordernum box-s\">"+"订单:"+data.data.listNum[i]+" </span>";
+            var  str=
+				"<a href=\"pro-detail.html\">\n" +
+                "<div class=\"tu fl clearfloat\">\n" +
+                "<img src="+data.data.skuList[i].skuImg+"/>\n" +
+                "</div>\n" +
+                "<div class=\"middle clearfloat fl\" >\n" +
+                "<p class=\"tit\">"+data.data.spuList[i].describe+"</p>\n" +
+                "<p class=\"fu-tit\">\n" +data.data.skuList[i].color+
+                "</p>\n" +
+                "<p class=\"price clearfloat\">\n" +
+                "<span class=\"ordernum box-s\">"+"订单:"+data.data.listNum[i]+" </span>\n"+
+                "<span class=\"xprice fl\">¥"+data.data.skuList[i].activePrice+"</span>\n" +
+                "<span class=\"yprice fl\">¥"+data.data.skuList[i].salePrice+"</span>\n" +
+                "<span class=\"sjzhuanx fl\">手机专享价</span>\n" +
+                "<span class=\"shu\">×"+data.data.carlist[i].productSkuNum+"</span>\n" +
+                "</p>\n" +
+
+                "</div>\n" +
+                "</a>"
+
+
+                $("#display").append(str)
+            }else{
+                alert("不等于1");
+
+                var  str=
+				"<a href=\"pro-detail.html\" >" +
+				"<div class=\"tu fl clearfloat\" >\n" +
+
+                    "<img src="+data.data.skuList[i].skuImg+"/>\n" +
+                    "</div>\n" +
+                    "<div class=\"middle clearfloat fl\">\n" +
+                    "<p class=\"tit\">"+data.data.spuList[i].describe+"</p>\n" +
+                    "<p class=\"fu-tit\">\n" +data.data.skuList[i].color+
+                    "</p>\n" +
+                    "<p class=\"price clearfloat\">\n" +
+                    "<span class=\"ordernum box-s\">"+"订单:"+data.data.listNum[i]+" </span>\n"+
+                    "<span class=\"xprice fl\">¥"+data.data.skuList[i].salePrice+"</span>\n" +
+                    "<span class=\"sjzhuanx fl\">手机专享价</span>\n" +
+                    "<span class=\"shu\">×"+data.data.carlist[i].productSkuNum+"</span>\n" +
+                    "</p>\n" +
+
+                    "</div>\n" +
+                    "</a>"
+             //   var num="<span class\"ordernum box-s\">"+"订单:"+data.data.listNum[i]+" </span>";
+            //    $("#display").append(num);
+                $("#display").append(str);
+
+
+               // $("#num").append(num)
+			}
+		}
+
+    }
+})
+
+
 	})
 </script>
 </head>
@@ -50,48 +123,33 @@
 	    		</ul>
 	    	</div>
 	    	<div class="order-list clearfloat">
-	    		<p class="ordernum box-s">
-	    			订单  123456789000
-	    			<span>待付款</span>
-	    		</p>
-	    		<div class="list clearfloat fl box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu fl clearfloat">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="middle clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<p class="price clearfloat">
-		    					<span class="xprice fl">¥299.00</span>
-		    					<span class="yprice fl">¥308</span>
-		    					<span class="sjzhuanx fl">手机专享价</span>
-		    					<span class="shu">×1</span>
-		    				</p>
-		    			</div>
-	    			</a>
+	    		<!--<p class="ordernum box-s">-->
+	    			<!--订单  123456789000-->
+	    			<!--<span>待付款</span>-->
+	    		<!--</p>-->
+	    		<div class="list clearfloat fl box-s" id="display">
+
+
 	    		</div>
-	    		<div class="list clearfloat fl box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu fl clearfloat">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="middle clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<p class="price clearfloat">
-		    					<span class="xprice fl">¥299.00</span>
-		    					<span class="yprice fl">¥308</span>
-		    					<span class="sjzhuanx fl">手机专享价</span>
-		    					<span class="shu">×1</span>
-		    				</p>
-		    			</div>
-	    			</a>
-	    		</div>
+	    		<!--<div class="list clearfloat fl box-s>-->
+	    			<!--<a href="pro-detail.html">-->
+		    			<!--<div class="tu fl clearfloat">-->
+		    				<!--<img src="upload/2.jpg"/>-->
+		    			<!--</div>-->
+		    			<!--<div class="middle clearfloat fl">-->
+		    				<!--<p class="tit">XXX夏季女装性感流行</p>-->
+							<!--<p class="fu-tit">-->
+								<!--粉红性感流行L尺寸-->
+							<!--</p>-->
+		    				<!--<p class="price clearfloat">-->
+		    					<!--<span class="xprice fl">¥299.00</span>-->
+		    					<!--<span class="yprice fl">¥308</span>-->
+		    					<!--<span class="sjzhuanx fl">手机专享价</span>-->
+		    					<!--<span class="shu">×1</span>-->
+		    				<!--</p>-->
+		    			<!--</div>-->
+	    			<!--</a>-->
+	    		<!--</div>-->
 	    		<a href="#" class="gopay-btn fr">
 	    			立即支付
 	    		</a>

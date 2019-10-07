@@ -68,7 +68,7 @@ public class TestController {
         Element element = null;
         try {
             element = new SAXBuilder().build(request.getInputStream()).getRootElement();
-            return messageService.messageFactory(element, session);
+            return messageService.messageFactory(element ,session);
         } catch (JDOMException e) {
             e.printStackTrace();
         } catch (IOException e) {

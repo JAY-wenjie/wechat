@@ -1,9 +1,6 @@
 package com.wechat.domain.mapper;
 
-import com.wechat.domain.model.WxUser;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
+import com.wechat.domain.model.WxUser;import org.apache.ibatis.annotations.Param;import java.util.List;
 
 public interface WxUserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -12,7 +9,7 @@ public interface WxUserMapper {
 
     int insertSelective(WxUser record);
 
-    WxUser selectByPrimaryKey(@Param("openid") String openid);
+    WxUser selectByPrimaryKey(String openid);
 
     int updateByPrimaryKeySelective(WxUser record);
 

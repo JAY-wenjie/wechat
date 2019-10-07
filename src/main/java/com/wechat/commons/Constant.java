@@ -11,8 +11,8 @@ import java.util.UUID;
  */
 public class Constant {
     //测试号使用
-    public static final String APPID = "wxa7250a1eca172a9e";
-    public static final String APPSECRET = "3f04c6225e2e0ea9950439ce9d6b3f25";
+    public static final String APPID = "wx899f93c8b804cc0f";
+    public static final String APPSECRET = "2efdca89d87933c25fe64b125d43eda1";
     public static String ACCESS_TOKEN = null;
     public static long ACCESS_TOKEN_TIME = 0L;
     public static String JSAPI_TICKET = null;
