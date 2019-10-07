@@ -50,7 +50,7 @@ public class ScoreSpuServiceImpl implements ScoreSpuService {
             UserScore userScore1 = new UserScore(1,wxUser.getId(),scoreSpu.getSocre(),1,date);
             userScoreMapper.reduceUserScores(userScore1);
             //用户积分详情表记录这次兑换
-            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), id, "用户兑换商品,积分-" + scoreSpu.getSocre(), date);
+            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), id, "用户兑换商品,积分-" + scoreSpu.getSocre(), date.toString());
             scoreInfoMapper.insert(scoreInfo);
             //积分商品表库存减少
             scoreSpuMapper.reducescoreSpu(id);
