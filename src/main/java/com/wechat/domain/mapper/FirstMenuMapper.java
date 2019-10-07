@@ -6,6 +6,7 @@ import tk.mybatis.mapper.common.Mapper;
 import java.util.List;
 import java.util.Map;
 
+@org.apache.ibatis.annotations.Mapper
 public interface FirstMenuMapper extends Mapper<FirstMenu> {
     /**
      * 类目分级

@@ -15,6 +15,10 @@
     <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/loading.css"/>
     <script type="text/javascript">
+        /*
+        显示个人中心主页信息
+        文杰
+         */
         $(window).load(function () {
             $(".loading").addClass("loader-chanage");
             $(".loading").fadeOut(300);
@@ -26,6 +30,8 @@
                     if (data.code == 0) {
                         $("#wxUserName").html(data.data.nickname);
                         $("#wxUserImg").attr("src", data.data.headimgurl);
+                        $("#score").html("积分："+data.data.score);
+                        $("#money").html("余额："+data.data.money);
                     }else {
                         alert(data.data.msg);
                     }
@@ -62,8 +68,8 @@
             超级会员
         </p>
         <p class="balance ta-c">
-            <span>余额：800元</span>
-            <span>积分：401</span>
+            <span id="money">余额：800元</span>
+            <span id="score">积分：401</span>
         </p>
         <a href="recharge.html">
             <input type="button" value="充值"/>
@@ -112,7 +118,7 @@
             <li class="clearfloat">
                 <a href="profit.html">
                     <i class="iconfont icon-ruhezhuanqian fl"></i>
-                    <p class="fl">我的收益</p>
+                    <p class="fl">我的积分</p>
                     <i class="iconfont icon-qianjin fr"></i>
                 </a>
             </li>

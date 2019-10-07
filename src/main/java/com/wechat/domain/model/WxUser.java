@@ -1,6 +1,8 @@
 package com.wechat.domain.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class WxUser {
     private Integer id;
@@ -30,6 +32,7 @@ public class WxUser {
      */
     private String city;
 
+
     /**
      * 国家
      */
@@ -53,7 +56,7 @@ public class WxUser {
     /**
      * 关注时间
      */
-    private Date subscribetime;
+    private String subscribetime;
 
     /**
      * 多个公众号用户唯一标识
@@ -69,6 +72,43 @@ public class WxUser {
      * 分组
      */
     private String groupid;
+    /**
+     * 用户积分
+     */
+    private  int score;
+
+    /**
+     * 用户积分信息收入花费详情
+     */
+    private List<ScoreInfo> scoreInfoList;
+    /**
+     * 账户余额 单位：分
+     */
+    private int money;
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public List<ScoreInfo> getScoreInfoList() {
+        return scoreInfoList;
+    }
+
+    public void setScoreInfoList(List<ScoreInfo> scoreInfoList) {
+        this.scoreInfoList = scoreInfoList;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public Integer getId() {
         return id;
@@ -118,6 +158,7 @@ public class WxUser {
         this.city = city;
     }
 
+
     public String getCountry() {
         return country;
     }
@@ -150,12 +191,19 @@ public class WxUser {
         this.headimgurl = headimgurl;
     }
 
-    public Date getSubscribetime() {
+
+    public String getSubscribetime() {
         return subscribetime;
     }
 
+    /**
+     * 设置入库出库格式
+     * @param subscribetime
+     */
     public void setSubscribetime(Date subscribetime) {
-        this.subscribetime = subscribetime;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createTime = sdf.format(subscribetime);
+        this.subscribetime = createTime;
     }
 
     public String getUnionid() {
@@ -180,5 +228,26 @@ public class WxUser {
 
     public void setGroupid(String groupid) {
         this.groupid = groupid;
+    }
+
+    @Override
+    public String toString() {
+        return "WxUser{" +
+                "id=" + id +
+                ", openid='" + openid + '\'' +
+                ", subscribe=" + subscribe +
+                ", nickname='" + nickname + '\'' +
+                ", sex=" + sex +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                ", language='" + language + '\'' +
+                ", headimgurl='" + headimgurl + '\'' +
+                ", subscribetime=" + subscribetime +
+                ", unionid='" + unionid + '\'' +
+                ", remark='" + remark + '\'' +
+                ", groupid='" + groupid + '\'' +
+                ", money='" + money + '\'' +
+                '}';
     }
 }

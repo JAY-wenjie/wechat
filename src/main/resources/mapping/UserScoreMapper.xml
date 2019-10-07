@@ -100,6 +100,7 @@
         <include refid="Base_Column_List"/>
         from user_score where user_id = #{id}
     </select>
+
     <!--根据用户id建立用户的积分表by杨思源-->
     <insert id="insertUserScore" parameterType="WxUser">
         insert into user_score(user_id)

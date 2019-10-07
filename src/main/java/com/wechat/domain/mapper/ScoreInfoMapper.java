@@ -23,4 +23,13 @@ public interface ScoreInfoMapper {
      * by杨思源
      */
     List<ScoreInfo> selectByuserscoreid(UserScore userScore);
+
+    /**
+     * 根据score_id查询所有积分收入支出明细
+     *
+     * @param id
+     * @return
+     * @autor 文杰
+     */
+    List<ScoreInfo> selectByScoreId(Integer id);
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.domain.mapper.UserAddressMapper">
+    <resultMap id="BaseResultMap" type="com.wechat.domain.model.UserAddress">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="adress_id" jdbcType="INTEGER" property="adressId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, user_id, adress_id, `status`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from user_address
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from user_address
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wechat.domain.model.UserAddress">
+        <!--@mbg.generated-->
+        insert into user_address (user_id, adress_id,
+        `status`)
+        values ( #{userId,jdbcType=INTEGER}, #{adressId,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wechat.domain.model.UserAddress">
+        <!--@mbg.generated-->
+        insert into user_address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="adressId != null">
+                adress_id,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="adressId != null">
+                #{adressId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.UserAddress">
+        <!--@mbg.generated-->
+        update user_address
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="adressId != null">
+                adress_id = #{adressId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.UserAddress">
+        <!--@mbg.generated-->
+        update user_address
+        set user_id = #{userId,jdbcType=INTEGER},
+        adress_id = #{adressId,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <resultMap id="selectUserAddressResultMap" type="map">
+        <id property="id" column="id"></id>
+        <result property="userId" column="user_id"></result>
+        <result property="status" column="status"></result>
+        <result property="provinces" column="provinces"></result>
+        <result property="cities" column="cities"></result>
+        <result property="areas" column="areas"></result>
+        <result property="address" column="address"></result>
+        <result property="name" column="name"></result>
+        <result property="telephone" column="telephone"></result>
+    </resultMap>
+    <!--文杰-->
+    <select id="selectUserAddress" resultMap="selectUserAddressResultMap" parameterType="WxUser">
+        select b.id,a.user_id, a.`status`,b.provinces,b.cities,b.areas,b.address,b.name,b.telephone
+        from user_address a
+                 INNER JOIN address b on a.user_id = #{wxUser.id,jdbcType=INTEGER} and a.adress_id = b.id
+    </select>
+</mapper>
