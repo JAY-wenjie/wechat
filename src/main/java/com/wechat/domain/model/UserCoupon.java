@@ -59,11 +59,22 @@ public class UserCoupon {
         this.status = status;
     }
 
+    public UserCoupon() {
+    }
+
+    public UserCoupon(Integer id, Integer userId, Integer couponId, Integer status) {
+        this.id = id;
+        this.userId = userId;
+        this.couponId = couponId;
+        this.status = status;
+    }
+
     public UserCoupon(Integer userId, Integer couponId, Integer status) {
         this.userId = userId;
         this.couponId = couponId;
         this.status = status;
     }
+
 
     @Override
     public String toString() {

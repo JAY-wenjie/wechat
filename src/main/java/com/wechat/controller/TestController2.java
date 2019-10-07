@@ -1,5 +1,9 @@
 package com.wechat.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.google.gson.JsonObject;
+import com.wechat.commons.JsonBean;
+import com.wechat.commons.JsonUtil;
 import com.wechat.domain.model.*;
 import com.wechat.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,6 +135,18 @@ public class TestController2 {
     public List<News> news() {
         List<News> news = newsService.selectAll();
         return news;
+    }
+
+    /**
+     * 查询用户的优惠券
+     * by杨思源
+     */
+    @RequestMapping(value = "userCoupons")
+    public String userCoupons() {
+        WxUser wxUser = new WxUser();
+        wxUser.setId(1);
+        List<DiscountCoupon> discountCoupons = userCouponService.selectCoupon(wxUser);
+        return JsonUtil.toJson(discountCoupons);
     }
 
 }

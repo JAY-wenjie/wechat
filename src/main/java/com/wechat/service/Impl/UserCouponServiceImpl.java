@@ -9,7 +9,10 @@ import com.wechat.service.UserCouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +54,7 @@ public class UserCouponServiceImpl implements UserCouponService {
                     discountCoupon.getPayScore(), 1, date);
             userScoreMapper.reduceUserScores(userScore1);
             //用户积分详情表更新,记录这次兑换
-            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "用户兑换优惠券,积分-" + discountCoupon.getPayScore(),date.toString());
+            ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), "用户兑换优惠券,积分-" + discountCoupon.getPayScore(), date);
             scoreInfoMapper.insert(scoreInfo);
             //返回1表示成功领取
             System.out.println("您已成功领取优惠券");
@@ -62,6 +65,22 @@ public class UserCouponServiceImpl implements UserCouponService {
             //返回0表示领取失败
             return false;
         }
+    }
+
+    /**
+     * 根据用户id查询用户的优惠券
+     * by杨思源
+     */
+    @Override
+    public List<DiscountCoupon> selectCoupon(WxUser wxUser) {
+        List<UserCoupon> userCoupons = userCouponMapper.selectByuserid(wxUser);
+        //存储用户的优惠券
+        List<DiscountCoupon> discountCoupons=new ArrayList<>();
+        for (UserCoupon userCoupon : userCoupons) {
+            DiscountCoupon discountCoupon=discountCouponMapper.selectDiscountCouponBycouponid(userCoupon);
+            discountCoupons.add(discountCoupon);
+        }
+        return discountCoupons;
     }
 
 }

@@ -1,5 +1,8 @@
 package com.wechat.domain.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -17,11 +20,13 @@ public class DiscountCoupon {
     /**
      * 起始日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
     /**
      * 截止日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     /**
