@@ -36,9 +36,9 @@ public class TestController2 {
      * 如果用户之前从未签到过则先建立用户积分表by杨思源
      */
     @RequestMapping(value = "userScore")
-    public Map<String, Object> userScore(HttpSession httpSession) {
-        WxUser wxUser = new WxUser();
-        wxUser.setId(6);
+    public Map<String, Object> userScore(HttpSession session) {
+        //获取用户信息
+        WxUser wxUser = (WxUser) session.getAttribute("wxuser");
         UserScore userScore = usereScoreService.selectByUserId(wxUser);
         Map<String, Object> map = new HashMap<>();
         map.put("username", "123");
@@ -52,9 +52,9 @@ public class TestController2 {
      * by杨思源
      */
     @RequestMapping(value = "userSign")
-    public boolean userSign(HttpSession httpSession) {
-        WxUser wxUser = new WxUser();
-        wxUser.setId(6);
+    public boolean userSign(HttpSession session) {
+        //获取用户信息
+        WxUser wxUser = (WxUser) session.getAttribute("wxuser");
         boolean flag = usereScoreService.userSign(wxUser);
         return flag;
     }
@@ -75,9 +75,9 @@ public class TestController2 {
      * 返回1表示领取成功,返回0表示领取失败
      */
     @RequestMapping(value = "addcoupons")
-    public boolean addcoupons(Integer id, Integer score) {
-        WxUser wxUser = new WxUser();
-        wxUser.setId(1);
+    public boolean addcoupons(Integer id, Integer score,HttpSession session) {
+        //获取用户信息
+        WxUser wxUser = (WxUser) session.getAttribute("wxuser");
         DiscountCoupon discountCoupon = new DiscountCoupon(id, score);
         boolean flag = userCouponService.addUserCoupon(wxUser, discountCoupon);
         return flag;
@@ -88,9 +88,9 @@ public class TestController2 {
      * by杨思源
      */
     @RequestMapping(value = "document")
-    public List<ScoreSpu> document() {
-        WxUser wxUser = new WxUser();
-        wxUser.setId(1);
+    public List<ScoreSpu> document(HttpSession session) {
+        //获取用户信息
+        WxUser wxUser = (WxUser) session.getAttribute("wxuser");
         List<ScoreSpu> scoreSpus = scoreInfoService.selectByuserscoreid(wxUser);
         return scoreSpus;
     }
@@ -120,9 +120,9 @@ public class TestController2 {
      * by杨思源
      */
     @RequestMapping(value = "addgoods")
-    public boolean addgoods(Integer id) {
-        WxUser wxUser = new WxUser();
-        wxUser.setId(1);
+    public boolean addgoods(Integer id,HttpSession session) {
+        //获取用户信息
+        WxUser wxUser = (WxUser) session.getAttribute("wxuser");
         boolean flag = scoreSpuService.addgoods(wxUser, id);
         return flag;
     }
@@ -142,11 +142,11 @@ public class TestController2 {
      * by杨思源
      */
     @RequestMapping(value = "userCoupons")
-    public String userCoupons() {
-        WxUser wxUser = new WxUser();
-        wxUser.setId(1);
+    public List<DiscountCoupon> userCoupons(HttpSession session) {
+        //获取用户信息
+        WxUser wxUser = (WxUser) session.getAttribute("wxuser");
         List<DiscountCoupon> discountCoupons = userCouponService.selectCoupon(wxUser);
-        return JsonUtil.toJson(discountCoupons);
+        return discountCoupons;
     }
 
 }

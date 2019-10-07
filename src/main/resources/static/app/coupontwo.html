@@ -35,20 +35,20 @@
 
 	function showData(data) {
 		var str="";
-        var xqo = eval('(' + data + ')')
-        alert(xqo);
-		for (var i in xqo){
+		for (var i=0;i<data.length;i++){
+		    var startTime=data[i].startTime.split("T")[0];
+		    var endTime=data[i].endTime.split("T")[0];
 		    str+="<div class=\"list clearfloat\">\n" +
                 "\t    \t\t\t<div class=\"left fl clearfloat\">\n" +
                 "\t    \t\t\t\t<p class=\"tit fl\">优惠券</p>\n" +
                 "\t    \t\t\t\t<ul class=\"clearfloat box-s fl\">\n" +
                 "\t    \t\t\t\t\t<li>使用期限</li>\n" +
-                "\t    \t\t\t\t\t<li>"+xqo[i].startTime+"~"+xqo[i].endTime+"</li>\n" +
+                "\t    \t\t\t\t\t<li>"+startTime+"~"+endTime+"</li>\n" +
                 "\t    \t\t\t\t</ul>\n" +
                 "\t    \t\t\t</div>\n" +
                 "\t    \t\t\t<div class=\"right fl clearfloat\">\n" +
                 "\t    \t\t\t\t<span>¥</span><br />\n" +
-                "\t    \t\t\t\t<span>"+xqo[i].discountPrice+"</span>\n" +
+                "\t    \t\t\t\t<span>"+data[i].discountPrice+"</span>\n" +
                 "\t    \t\t\t</div>\n" +
                 "\t    \t\t</div>";
 		}
