@@ -51,6 +51,14 @@ public class PoductSpu {
     */
     private String productSpuImg;
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -107,13 +115,7 @@ public class PoductSpu {
         this.updateTime = updateTime;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
     public String getDescribe() {
         return describe;

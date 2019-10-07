@@ -6,8 +6,8 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_time" jdbcType="TIME" property="createTime"/>
+        <result column="update_time" jdbcType="TIME" property="updateTime"/>
         <result column="describe" jdbcType="VARCHAR" property="describe"/>
         <result column="country" jdbcType="VARCHAR" property="country"/>
         <result column="product_spu_img" jdbcType="VARCHAR" property="productSpuImg"/>
@@ -40,8 +40,8 @@
         update_time, `describe`, country,
         product_spu_img, price, socre,
         `comment`, sku)
-        values (#{productName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
-        #{updateTime,jdbcType=TIMESTAMP}, #{describe,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR},
+        values (#{productName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIME},
+        #{updateTime,jdbcType=TIME}, #{describe,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR},
         #{productSpuImg,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{socre,jdbcType=INTEGER},
         #{comment,jdbcType=INTEGER}, #{sku,jdbcType=INTEGER})
     </insert>
@@ -92,10 +92,10 @@
                 #{status,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
+                #{createTime,jdbcType=TIME},
             </if>
             <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
+                #{updateTime,jdbcType=TIME},
             </if>
             <if test="describe != null">
                 #{describe,jdbcType=VARCHAR},
@@ -131,10 +131,10 @@
                 `status` = #{status,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
+                create_time = #{createTime,jdbcType=TIME},
             </if>
             <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIME},
             </if>
             <if test="describe != null">
                 `describe` = #{describe,jdbcType=VARCHAR},
@@ -165,8 +165,8 @@
         update score_spu
         set product_name = #{productName,jdbcType=VARCHAR},
         `status` = #{status,jdbcType=INTEGER},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIME},
+        update_time = #{updateTime,jdbcType=TIME},
         `describe` = #{describe,jdbcType=VARCHAR},
         country = #{country,jdbcType=VARCHAR},
         product_spu_img = #{productSpuImg,jdbcType=VARCHAR},

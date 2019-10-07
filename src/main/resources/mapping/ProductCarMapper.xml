@@ -138,7 +138,7 @@
   <id property="id" column="cid"/>
   <result property="brandId" column="brand_id"/>
   <result property="country" column="country"/>
-  <result property="createTime " column="create_time"/>
+  <result property="createTime" column="create_time"/>
   <result property="describe" column="describe"/>
   <result property="discount" column="discount"/>
   <result property="productName" column="product_name"/>

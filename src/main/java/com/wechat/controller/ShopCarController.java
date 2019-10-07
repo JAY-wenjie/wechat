@@ -1,5 +1,6 @@
 package com.wechat.controller;
 
+import com.wechat.commons.JsonBean;
 import com.wechat.domain.model.*;
 import com.wechat.service.OrderService;
 import com.wechat.service.PoductSpuService;
@@ -189,5 +190,15 @@ public class ShopCarController {
         return map;
     }
 
+    @RequestMapping("insertCar")
 
+    public JsonBean insertCar(WxUser wxUser,ProductCar productCar,int num, int skuid){
+    productCar.setUserId(wxUser.getId());
+    productCar.setProductSkuId(skuid);
+    productCar.setStatue(-1);
+    productCar.setProductSkuNum(num);
+       int a=     productCarService.insert(productCar);
+        System.out.println(a);
+        return  new JsonBean(0,a,"success");
+    }
 }
