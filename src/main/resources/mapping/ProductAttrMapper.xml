@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.domain.mapper.ProductAttrMapper">
+  <resultMap id="BaseResultMap" type="com.wechat.domain.model.ProductAttr">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_sku_id" jdbcType="INTEGER" property="productSkuId" />
+    <result column="product_spu_id" jdbcType="INTEGER" property="productSpuId" />
+    <result column="attr_value_id" jdbcType="INTEGER" property="attrValueId" />
+    <result column="attribute_id" jdbcType="INTEGER" property="attributeId" />
+    <result column="create_time" jdbcType="TIME" property="createTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIME" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, product_sku_id, product_spu_id, attr_value_id, attribute_id, create_time, `status`, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from product_attr
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from product_attr
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wechat.domain.model.ProductAttr">
+    <!--@mbg.generated-->
+    insert into product_attr (id, product_sku_id, product_spu_id, 
+      attr_value_id, attribute_id, create_time, 
+      `status`, update_time)
+    values (#{id,jdbcType=INTEGER}, #{productSkuId,jdbcType=INTEGER}, #{productSpuId,jdbcType=INTEGER}, 
+      #{attrValueId,jdbcType=INTEGER}, #{attributeId,jdbcType=INTEGER}, #{createTime,jdbcType=TIME}, 
+      #{status,jdbcType=INTEGER}, #{updateTime,jdbcType=TIME})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wechat.domain.model.ProductAttr">
+    <!--@mbg.generated-->
+    insert into product_attr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productSkuId != null">
+        product_sku_id,
+      </if>
+      <if test="productSpuId != null">
+        product_spu_id,
+      </if>
+      <if test="attrValueId != null">
+        attr_value_id,
+      </if>
+      <if test="attributeId != null">
+        attribute_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productSkuId != null">
+        #{productSkuId,jdbcType=INTEGER},
+      </if>
+      <if test="productSpuId != null">
+        #{productSpuId,jdbcType=INTEGER},
+      </if>
+      <if test="attrValueId != null">
+        #{attrValueId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeId != null">
+        #{attributeId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIME},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.ProductAttr">
+    <!--@mbg.generated-->
+    update product_attr
+    <set>
+      <if test="productSkuId != null">
+        product_sku_id = #{productSkuId,jdbcType=INTEGER},
+      </if>
+      <if test="productSpuId != null">
+        product_spu_id = #{productSpuId,jdbcType=INTEGER},
+      </if>
+      <if test="attrValueId != null">
+        attr_value_id = #{attrValueId,jdbcType=INTEGER},
+      </if>
+      <if test="attributeId != null">
+        attribute_id = #{attributeId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIME},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIME},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.ProductAttr">
+    <!--@mbg.generated-->
+    update product_attr
+    set product_sku_id = #{productSkuId,jdbcType=INTEGER},
+      product_spu_id = #{productSpuId,jdbcType=INTEGER},
+      attr_value_id = #{attrValueId,jdbcType=INTEGER},
+      attribute_id = #{attributeId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIME},
+      `status` = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIME}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

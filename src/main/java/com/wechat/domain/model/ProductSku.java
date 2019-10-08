@@ -48,7 +48,18 @@ public class ProductSku {
     * 库存数量
     */
     private Integer amount;
- private  PoductSpu poductSpu;
+
+    private ProductAttr productAttr;
+
+    public ProductAttr getProductAttr() {
+        return productAttr;
+    }
+
+    public void setProductAttr(ProductAttr productAttr) {
+        this.productAttr = productAttr;
+    }
+
+    private  PoductSpu poductSpu;
 
     public PoductSpu getPoductSpu() {
         return poductSpu;

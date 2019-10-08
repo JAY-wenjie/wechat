@@ -19,5 +19,6 @@ public interface ProductSkuService{
 
     int updateByPrimaryKey(ProductSku record);
     List<ProductSku> selectByStatus(int id);
+    ProductSku selByAttr(int id);
 
 }

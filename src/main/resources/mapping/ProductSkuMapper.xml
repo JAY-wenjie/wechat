@@ -153,4 +153,30 @@ where status=#{status}
       amount = #{amount,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selByAttr" parameterType="java.lang.Integer" resultMap="BaseResultM">
+    <!--@mbg.generated-->
+    SELECT a.id ,b.attribute_id ,b.attr_value_id,b.product_sku_id,c.value,c.id cid
+    from product_sku a INNER JOIN product_attr b ON a.id=b.product_sku_id INNER JOIN attr_value c ON c.id=b.attr_value_id WHERE a.id=#{id};
+  </select>
+  <resultMap id="BaseResultM" type="com.wechat.domain.model.ProductSku">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <!--<result column="product_spu_id" jdbcType="INTEGER" property="productSpuId" />-->
+    <!--<result column="price" jdbcType="INTEGER" property="price" />-->
+    <!--<result column="sale_price" jdbcType="INTEGER" property="salePrice" />-->
+    <!--<result column="active_price" jdbcType="INTEGER" property="activePrice" />-->
+    <!--<result column="status" jdbcType="VARCHAR" property="status" />-->
+    <!--<result column="color" jdbcType="VARCHAR" property="color" />-->
+    <!--<result column="sku_img" jdbcType="VARCHAR" property="skuImg" />-->
+    <!--<result column="amount" jdbcType="INTEGER" property="amount" />-->
+    <association property="productAttr" javaType="com.wechat.domain.model.ProductAttr">
+      <id column="attribute_id" property="attributeId"/>
+      <result column="attr_value_id" property="attrValueId"/>
+      <result column="product_sku_id" property="productSkuId"/>
+      <association property="attrValue" javaType="com.wechat.domain.model.AttrValue">
+        <id column="cid" property="id"/>
+        <result column="value" property="value"/>
+      </association>
+    </association>
+  </resultMap>
 </mapper>

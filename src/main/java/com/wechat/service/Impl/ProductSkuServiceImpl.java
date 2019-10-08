@@ -49,4 +49,8 @@ public class ProductSkuServiceImpl implements ProductSkuService{
         return productSkuMapper.selectByStatus(id);
     }
 
+    @Override
+    public ProductSku selByAttr(int id) {
+        return productSkuMapper.selByAttr(id);
+    }
 }
