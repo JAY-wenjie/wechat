@@ -26,7 +26,6 @@ public interface UserCouponMapper {
     /**
      * 用户使用优惠券,用户优惠券减少
      * by杨思源
-     */
-
+    **/
 
 }

@@ -17,7 +17,6 @@ public interface ScoreInfoMapper {
     int updateByPrimaryKeySelective(ScoreInfo record);
 
     int updateByPrimaryKey(ScoreInfo record);
-
     /**
      * 根据用户表id查询兑换记录
      * 优惠券和商品

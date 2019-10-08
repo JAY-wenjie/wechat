@@ -5,7 +5,6 @@ import com.github.wxpay.sdk.WXPayConfig;
 import java.io.InputStream;
 
 public class MyConfig implements WXPayConfig {
-
     @Override
     public String getAppID() {
         return "wxc37f01894579f97b";

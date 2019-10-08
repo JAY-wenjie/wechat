@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.domain.mapper.PcaCitiesMapper">
+  <resultMap id="BaseResultMap" type="com.wechat.domain.model.PcaCities">
+    <!--@mbg.generated-->
+    <id column="city_id" jdbcType="VARCHAR" property="cityId" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="province_id" jdbcType="VARCHAR" property="provinceId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    city_id, city_name, province_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pca_cities
+    where city_id = #{cityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from pca_cities
+    where city_id = #{cityId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wechat.domain.model.PcaCities">
+    <!--@mbg.generated-->
+    insert into pca_cities (city_id, city_name, province_id
+      )
+    values (#{cityId,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wechat.domain.model.PcaCities">
+    <!--@mbg.generated-->
+    insert into pca_cities
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="cityName != null">
+        city_name,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cityId != null">
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.PcaCities">
+    <!--@mbg.generated-->
+    update pca_cities
+    <set>
+      <if test="cityName != null">
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where city_id = #{cityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.PcaCities">
+    <!--@mbg.generated-->
+    update pca_cities
+    set city_name = #{cityName,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR}
+    where city_id = #{cityId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -8,6 +8,7 @@ import com.wechat.service.FirstMenuService;
 import java.util.List;
 import java.util.Map;
 
+
 @Service
 public class FirstMenuServiceImpl implements FirstMenuService{
 

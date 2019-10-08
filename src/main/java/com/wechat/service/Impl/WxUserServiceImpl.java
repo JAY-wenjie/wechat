@@ -16,6 +16,7 @@ public class WxUserServiceImpl implements WxUserService {
 
     /**
      * 获取用户信息后根据库中是否存在来进行增加和更新操作
+     *
      * @param wxUser
      * @return
      */
@@ -23,7 +24,7 @@ public class WxUserServiceImpl implements WxUserService {
     public WxUser autoInserWxUser(WxUser wxUser) {
         WxUser ddwxUser = wxUserMapper.selectByPrimaryKey(wxUser.getOpenid());
         System.out.println(ddwxUser.toString());
-        if (ddwxUser==null) {
+        if (ddwxUser == null) {
             System.out.println("增加开始");
             int result = wxUserMapper.insertSelective(wxUser);
             System.out.println("增加+++++++++++++++++++++++++++++++++++++" + result);
@@ -33,7 +34,7 @@ public class WxUserServiceImpl implements WxUserService {
             System.out.println("更新+++++++++++++++++++++++++++++++++++++" + result);
             wxUser = ddwxUser;
         }
-        System.out.println("完整的用户数据"+wxUser.toString());
+        System.out.println("完整的用户数据" + wxUser.toString());
         return wxUser;
     }
 
@@ -43,5 +44,35 @@ public class WxUserServiceImpl implements WxUserService {
     }
 
 
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return wxUserMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int insert(WxUser record) {
+        return wxUserMapper.insert(record);
+    }
+
+    @Override
+    public int insertSelective(WxUser record) {
+        return wxUserMapper.insertSelective(record);
+    }
+
+    @Override
+    public WxUser selectByPrimaryKey(String openid) {
+        return wxUserMapper.selectByPrimaryKey(openid);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(WxUser record) {
+        return wxUserMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(WxUser record) {
+        return wxUserMapper.updateByPrimaryKey(record);
+    }
 }
+
 

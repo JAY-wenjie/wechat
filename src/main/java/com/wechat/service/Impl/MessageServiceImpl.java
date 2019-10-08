@@ -56,6 +56,7 @@ public class MessageServiceImpl implements MessageService {
         String msgId = element.getChildText("MsgId");
         WxUser dwxUser = new WxUser();
         dwxUser.setOpenid(fromUserName);
+
         dwxUser = wxUserMapper.selectByPrimaryKey(dwxUser.getOpenid());
         if (msgType.equals("event")) {
             System.out.println("进入事件");
@@ -138,6 +139,7 @@ public class MessageServiceImpl implements MessageService {
             System.out.println("最新的用户数据"+wx_user.toString());
             xml = creatResultXml(messageList, fromUserName, toUserName, "news",eventKey,ticket);
             dwxUser = wx_user;
+
         } else if(event.equals("unsubscribe")) {
             wx_user.setOpenid(fromUserName);
             wx_user.setSubscribe(0);

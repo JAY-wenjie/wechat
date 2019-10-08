@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.domain.mapper.ScoreSpuMapper">
+    <resultMap id="BaseResultMap" type="com.wechat.domain.model.ScoreSpu">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_time" jdbcType="TIME" property="createTime"/>
+        <result column="update_time" jdbcType="TIME" property="updateTime"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="product_spu_img" jdbcType="VARCHAR" property="productSpuImg"/>
+        <result column="price" jdbcType="INTEGER" property="price"/>
+        <result column="socre" jdbcType="INTEGER" property="socre"/>
+        <result column="comment" jdbcType="INTEGER" property="comment"/>
+        <result column="sku" jdbcType="INTEGER" property="sku"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, product_name, `status`, create_time, update_time, `describe`, country, product_spu_img,
+        price, socre, `comment`, sku
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from score_spu
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from score_spu
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.ScoreSpu"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into score_spu (product_name, `status`, create_time,
+        update_time, `describe`, country,
+        product_spu_img, price, socre,
+        `comment`, sku)
+        values (#{productName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIME},
+        #{updateTime,jdbcType=TIME}, #{describe,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR},
+        #{productSpuImg,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{socre,jdbcType=INTEGER},
+        #{comment,jdbcType=INTEGER}, #{sku,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.ScoreSpu"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into score_spu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="describe != null">
+                `describe`,
+            </if>
+            <if test="country != null">
+                country,
+            </if>
+            <if test="productSpuImg != null">
+                product_spu_img,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="socre != null">
+                socre,
+            </if>
+            <if test="comment != null">
+                `comment`,
+            </if>
+            <if test="sku != null">
+                sku,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIME},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIME},
+            </if>
+            <if test="describe != null">
+                #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="productSpuImg != null">
+                #{productSpuImg,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=INTEGER},
+            </if>
+            <if test="socre != null">
+                #{socre,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=INTEGER},
+            </if>
+            <if test="sku != null">
+                #{sku,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.ScoreSpu">
+        <!--@mbg.generated-->
+        update score_spu
+        <set>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIME},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIME},
+            </if>
+            <if test="describe != null">
+                `describe` = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="productSpuImg != null">
+                product_spu_img = #{productSpuImg,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=INTEGER},
+            </if>
+            <if test="socre != null">
+                socre = #{socre,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                `comment` = #{comment,jdbcType=INTEGER},
+            </if>
+            <if test="sku != null">
+                sku = #{sku,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.ScoreSpu">
+        <!--@mbg.generated-->
+        update score_spu
+        set product_name = #{productName,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIME},
+        update_time = #{updateTime,jdbcType=TIME},
+        `describe` = #{describe,jdbcType=VARCHAR},
+        country = #{country,jdbcType=VARCHAR},
+        product_spu_img = #{productSpuImg,jdbcType=VARCHAR},
+        price = #{price,jdbcType=INTEGER},
+        socre = #{socre,jdbcType=INTEGER},
+        `comment` = #{comment,jdbcType=INTEGER},
+        sku = #{sku,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--查询可以兑换的所有商品by杨思源-->
+    <select id="selectscoreSpus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from score_spu where status=1
+    </select>
+    <!--根据id查询兑换的商品by杨思源-->
+    <select id="selectByid" parameterType="integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from score_spu where id=#{id}
+    </select>
+    <update id="reducescoreSpu" parameterType="integer">
+        update score_spu
+        set sku=sku-1
+        where id=#{id}
+    </update>
+    <select id="selectByids" parameterType="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from score_spu where id in
+        <foreach item="id" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <select id="selectByscore" parameterType="integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from score_spu where socre =#{score} and status=1
+    </select>
+    <select id="selectBycomment" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from score_spu where comment&gt;=#{low} and comment&lt;= #{high}
+    </select>
+</mapper>

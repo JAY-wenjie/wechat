@@ -1,6 +1,10 @@
 package com.wechat.domain.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
+
 /**
  * @author:杨思源
  * @Date:
@@ -16,11 +20,13 @@ public class DiscountCoupon {
     /**
      * 起始日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
     /**
      * 截止日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     /**
@@ -105,6 +111,14 @@ public class DiscountCoupon {
 
     public void setCouponSku(Integer couponSku) {
         this.couponSku = couponSku;
+    }
+
+    public DiscountCoupon() {
+    }
+
+    public DiscountCoupon(Integer id, Integer payScore) {
+        this.id = id;
+        this.payScore = payScore;
     }
 
     @Override

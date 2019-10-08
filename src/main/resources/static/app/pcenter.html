@@ -30,7 +30,8 @@
                     if (data.code == 0) {
                         $("#wxUserName").html(data.data.nickname);
                         $("#wxUserImg").attr("src", data.data.headimgurl);
-                        $("#score").html("积分："+data.data.score)
+                        $("#score").html("积分："+data.data.score);
+                        $("#money").html("余额："+data.data.money);
                     }else {
                         alert(data.data.msg);
                     }
@@ -67,7 +68,7 @@
             超级会员
         </p>
         <p class="balance ta-c">
-            <span>余额：800元</span>
+            <span id="money">余额：800元</span>
             <span id="score">积分：401</span>
         </p>
         <a href="recharge.html">

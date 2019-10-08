@@ -16,9 +16,44 @@
     <link rel="stylesheet" type="text/css" href="css/loading.css"/>
 <script type="text/javascript">
 	$(window).load(function(){
-		$(".loading").addClass("loader-chanage")
-		$(".loading").fadeOut(300)
-	})
+		$(".loading").addClass("loader-chanage");
+		$(".loading").fadeOut(300);
+        $.ajax({
+            debug: true,
+            type: "post",
+            url: "http://05ualz4.hn3.mofasuidao.cn/wechat/userCoupons.do",
+            async: false,
+            success: function (data) {
+                //数据拼接
+                showData(data);
+            },
+            error: function (msg) {
+                alert("错误信息:" + msg);
+            }
+        })
+    })
+
+	function showData(data) {
+		var str="";
+		for (var i=0;i<data.length;i++){
+		    var startTime=data[i].startTime.split("T")[0];
+		    var endTime=data[i].endTime.split("T")[0];
+		    str+="<div class=\"list clearfloat\">\n" +
+                "\t    \t\t\t<div class=\"left fl clearfloat\">\n" +
+                "\t    \t\t\t\t<p class=\"tit fl\">优惠券</p>\n" +
+                "\t    \t\t\t\t<ul class=\"clearfloat box-s fl\">\n" +
+                "\t    \t\t\t\t\t<li>使用期限</li>\n" +
+                "\t    \t\t\t\t\t<li>"+startTime+"~"+endTime+"</li>\n" +
+                "\t    \t\t\t\t</ul>\n" +
+                "\t    \t\t\t</div>\n" +
+                "\t    \t\t\t<div class=\"right fl clearfloat\">\n" +
+                "\t    \t\t\t\t<span>¥</span><br />\n" +
+                "\t    \t\t\t\t<span>"+data[i].discountPrice+"</span>\n" +
+                "\t    \t\t\t</div>\n" +
+                "\t    \t\t</div>";
+		}
+		$("#Coupon").append(str);
+    }
 </script>
 </head>
 <!--loading页开始-->
@@ -40,46 +75,7 @@
 			<p>我的优惠券</p>
 	    </header>
 	    <div id="main" class="mui-clearfix">
-	    	<div class="coupontwo clearfloat box-s">
-	    		<div class="list clearfloat">
-	    			<div class="left fl clearfloat">
-	    				<p class="tit fl">优惠券</p>
-	    				<ul class="clearfloat box-s fl">
-	    					<li>使用期限</li>
-	    					<li>2016.04.20~2016.06.20</li>
-	    				</ul>
-	    			</div>
-	    			<div class="right fl clearfloat">
-	    				<span>¥</span><br />
-	    				<span>100</span>
-	    			</div>
-	    		</div>
-	    		<div class="list clearfloat">
-	    			<div class="left fl clearfloat">
-	    				<p class="tit fl">优惠券</p>
-	    				<ul class="clearfloat box-s fl">
-	    					<li>使用期限</li>
-	    					<li>2016.04.20~2016.06.20</li>
-	    				</ul>
-	    			</div>
-	    			<div class="right fl clearfloat">
-	    				<span>¥</span><br />
-	    				<span>100</span>
-	    			</div>
-	    		</div>
-	    		<div class="list clearfloat">
-	    			<div class="left fl clearfloat">
-	    				<p class="tit fl">优惠券</p>
-	    				<ul class="clearfloat box-s fl">
-	    					<li>使用期限</li>
-	    					<li>2016.04.20~2016.06.20</li>
-	    				</ul>
-	    			</div>
-	    			<div class="right fl clearfloat">
-	    				<span>¥</span><br />
-	    				<span>100</span>
-	    			</div>
-	    		</div>
+	    	<div class="coupontwo clearfloat box-s" id="Coupon">
 	    	</div>
 	    </div>
 	</body>
