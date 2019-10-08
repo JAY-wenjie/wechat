@@ -2,6 +2,8 @@ package com.wechat.domain.model;
 
 import javax.persistence.Id;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class PoductSpu {
     @Id
@@ -50,6 +52,24 @@ public class PoductSpu {
     * spu产品展示缩略图
     */
     private String productSpuImg;
+
+    private Map<String,Object> productSku;
+
+    public Map<String, Object> getProductSku() {
+        return productSku;
+    }
+
+    public void setProductSku(Map<String, Object> productSku) {
+        this.productSku = productSku;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public Integer getId() {
         return id;
@@ -107,13 +127,7 @@ public class PoductSpu {
         this.updateTime = updateTime;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
     public String getDescribe() {
         return describe;

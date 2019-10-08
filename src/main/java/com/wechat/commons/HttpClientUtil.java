@@ -16,7 +16,6 @@ import java.io.IOException;
  * \
  */
 public class HttpClientUtil {
-
     public static JSONObject doGet(String url){
         JSONObject jsonObject = null;
         //实例化httpget请求

@@ -91,7 +91,7 @@ public class TestController {
         System.out.println("用户通过网页授权微信服务器返回的code:" + code);
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Constant.APPID + "&secret=" + Constant.APPSECRET + "&code=" + code + "&grant_type=authorization_code";
         JSONObject jsonObject = HttpClientUtil.doGet(url);
-        System.out.println("通过获取的code从微信服务器获取的数据");//
+        System.out.println("通过获取的code从微信服务器获取的数据"+jsonObject.toString());//
         if(session.getAttribute("wxUser")==null){
             //根据通过code获取到的access_token 和 openid获取用户信息
             String url2 = "https://api.weixin.qq.com/sns/userinfo?access_token=" + jsonObject.get("access_token").toString() + "&openid=" + jsonObject.get("openid") + "&lang=zh_CN";

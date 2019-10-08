@@ -39,21 +39,24 @@
                             var sum = (data[i].listSku[0].activePrice) * (data[i].productSkuNum);
                             sum++;
                             alert("sum"+sum);
-                            var str = "<section class=\"shopcar\">\n" +
-                                "<div class=\"shopcar-checkbox\">\n" +
-                                "<label for=\"shopcar\" ></label>\n" +
-                                "<input type=\"checkbox\" id=\"shopcar\" name=\"checkbox\" value=\""+data[i].listSku[0].id+"\"/>" +
+                            var str ="<section class=\"shopcar\">\n" +
+                              "<div class=\"shopcar-checkbox\">\n" +
+                               "<label  for=\"shopcar\" class=\"checkbox\"  onclick='jisuan(this)' id=\"lable\" onselectstart=\"return false\" ></label >\n" +
+                                "<input type=\"checkbox\" id=\"shopcar\" name='checkbox' value="+data[i].listSku[0].id+">" +
+
                                 "\t</div>\n" +
                                 "\t<figure><img src=\"\"/></figure>\n" +
-                                "\t<div class=\"shopclist clearfloat fl\" id=\"display\"><p class=\"tit\">" + data[i].listSku[0].poductSpu.describe + "</p>\n" +
+                                "\t<div class=\"shopclist clearfloat fl\" >" +
+                                "<p class=\"tit\">" + data[i].listSku[0].poductSpu.describe + "</p>\n" +
                                 "<p class=\"fu-tit\">" + data[i].listSku[0].color + "</p>\n" +
                                 "<div class=\"bottom clearfloat\">\n" +
                                 "<span class=\"fl hicon\">" + data[i].listSku[0].activePrice + "</span>\n" +
                                 "<span class=\"fl huicon\">" + data[i].listSku[0].salePrice + "</span>\n" +
                                 "<span class=\"fl sjzx\">手机专享价</span>\n" +
                                 "<span class=\"fr shu\">×" + data[i].productSkuNum + "</span>\n" +
-                                "</div>\t</div>\n" +
-                                "</section>";
+                                "</div>\t" +
+                                "</div>\n" +
+                              "</section>";
                             $("#display").append(str);
 
                         } else {
@@ -69,20 +72,21 @@
                             sum2++;
                             alert("sum2"+sum2);
                             var str = "<section class=\"shopcar\">\n" +
-                                "<div class=\"shopcar-checkbox\">\n" +
-                                "<label for=\"shopcar\" ></label>\n" +
-                                "<input type=\"checkbox\" id=\"shopcar\" name=\"checkbox\" value=\""+data[i].listSku[0].id+"\"/>" +
+                               "<div class=\"shopcar-checkbox\">\n" +
+                                "<label for=\"shopcar\" class=\"checkbox\" onclick='jisuan(this)' id=\"lable\" onselectstart=\"return false\" ></label >\n" +
+                                "<input type=\"checkbox\" id=\"shopcar\" name='checkbox' value="+data[i].listSku[0].id+" >" +
                                 "\t</div>\n" +
                                 "\t<figure><img src=\"\"/></figure>\n" +
-                                "\t<div class=\"shopclist clearfloat fl\" id=\"display\"><p class=\"tit\">" + data[i].listSku[0].poductSpu.describe + "</p>\n" +
+                                "\t<div class=\"shopclist clearfloat fl\" ><p class=\"tit\">" + data[i].listSku[0].poductSpu.describe + "</p>\n" +
                                 "<p class=\"fu-tit\">" + data[i].listSku[0].color + "</p>\n" +
                                 "<div class=\"bottom clearfloat\">\n" +
                                 "<span class=\"fl hicon\">" + data[i].listSku[0].salePrice + "</span>\n" +
                                 // "<span class=\"fl huicon\>" + data.get(i).getListSku().get(i).getSalePrice()+"< /span>\n" +
                                 "<span class=\"fl sjzx\">手机专享价</span>\n" +
                                 "<span class=\"fr shu\">×" + data[i].productSkuNum + "</span>\n" +
-                                "</div>\t</div>\n" +
-                                "</section>";
+                                "</div>\t" +
+                               "</div>\n" +
+                              "</section>";
                             $("#display").append(str);
 
                         }
@@ -91,45 +95,22 @@
                     var sum3 = "<span>合计：</span>￥" + sum1;
                     $("#sum").append(sum3);
 
-                    var zhi;
+                       //
+                       // $.ajax({
+                       //     debug: true,
+                       //    url: "http://localhost:8080/wechat/selCar2",
+                       //     type: "post",
+                       //    data: {"zhi": zhi},
+                       //    dataType: "json",
+                       //      success: function (data) {
+                       //
+                       //   }
+                       //
+                       //  })
 
-                    function abc() {
-                        alert("a");
-                        var idsstr = " ";
-                        var zhi = " ";
-                        $("input[name=checkbox]").each(function () { //遍历table里的全部checkbox
-                            idsstr += $(this).val() + ","; //获取所有checkbox的值
-                            if ($(this).attr("checked")) {
-                                zhi += $(this).val() + ",";
-                            }//如果被选中
-                             //获取被选中的值
-                        });
-                        // if(idsstr.length > 0) //如果获取到
-                        //     idsstr = idsstr.substring(0, idsstr.length - 1); //把最后一个逗号去掉
-                        // if(zhi.length > 0) //如果获取到
-                        //     zhi = zhi.substring(0, zhi.length - 1); //把最后一个逗号去掉
-                        alert("所有checkbox的值：" + idsstr);
-                        alert("被选中checkbox的值：" + zhi);
-                        // document.getElementById("fm1").action="http://ph5fhig.hn3.mofasuidao.cn/wechat/selCar2"+zhi
-                        // document.getElementById("fm1").submit();
-                        // document.form.action="<%=path%>/delete1/?zhi="+zhi
-//	document.form.submit()
 
-                        $.ajax({
-                            debug: true,
-                            url: "http://localhost:8080/wechat/selCar2",
-                            type: "post",
-                            data: {"zhi": zhi},
-                            dataType: "json",
-                            success: function (data) {
-
-                            }
-
-                        })
-
-                    }
                 }
-            })
+             })
 
 
         })
@@ -186,23 +167,96 @@
 
         <!--去结算-->
         <section class="shopcar shopcartwo">
-            <div class="shopcar-checkbox">
-                <label for="shopcar" onselectstart="return false"></label>
-                <input type="checkbox" id="shopcar"  onclick="abc()"/>
+            <div class="shopcar-checkbox  checkboxall">
+                <label for="shopcar" id="quanxuan" onselectstart="return false"></label>
+                <input type="checkbox"  id="shopcar"  />
             </div>
             <span class="fl qxuan">全选</span>
-            <a    href="confirm.html" class="jiesuan clearfloat fr box-s">去结算</a>
+            <a   onclick="abc()" class="jiesuan clearfloat fr box-s">去结算</a>
             <p class="fr heji" id="sum"></p>
         </section>
     </div>
     <script type="text/javascript">
-        $(".shopcar-checkbox label").on('touchstart', function () {
-            if ($(this).hasClass('shopcar-checkd')) {
-                $(".shopcar-checkbox label").removeClass("shopcar-checkd")
-            } else {
-                $(".shopcar-checkbox label").addClass("shopcar-checkd")
-            }
-        })
+        // $(".shopcar-checkbox label").on('touchstart', function () {
+        //     if ($(this).hasClass('shopcar-checkd')) {
+        //         $(this).removeClass("shopcar-checkd");
+        //     } else {
+        //         $(this).addClass("shopcar-checkd");
+        //
+        //
+        //     }
+        // })
+        // $(".checkboxall").on('touchstart', function () {
+        //     if ($(this).hasClass('shopcar-checkd')) {
+        //         $(this).removeClass("shopcar-checkd");
+        //         $(".shopcar-checkbox label").removeClass("shopcar-checkd");
+        //
+        //     } else {
+        //         $(this).addClass("shopcar-checkd");
+        //         $(".shopcar-checkbox label").addClass("shopcar-checkd");
+        //
+        //     }
+        // })
+        function jisuan(elem) {
+            $this=$(elem);
+            if ($this.hasClass('shopcar-checkd')) {
+                $this.removeClass("shopcar-checkd")
+                    } else {
+                $this.addClass("shopcar-checkd")
+               // $this.attr("checked");
+           // $("input[name=checkbox]").attr("checked",true);
+
+                    }
+
+
+        }
+        function abc(){
+            $(document).ready(function(){
+                var idsstr = " ";
+                var zhi = " ";
+                var count=0;
+                var count2=0;
+
+
+
+                $("input[name=checkbox]").each(function(){ //遍历table里的全部checkbox
+                    // idsstr += $(this).val() + ","; //获取所有checkbox的值
+                    // alert("  idsstr"+  idsstr);
+
+                        count++;
+                        alert("count"+count);
+                     //获取被选中的值
+             //       for(var i=0;i<count.length;i++){
+
+                    //    }//如果被选中
+                 // }
+                    if($(".checkbox").hasClass('shopcar-checkd')) {
+                        // zhi += $(this).val() + ",";
+                        // alert(zhi+"   zhi");
+                        count2++;
+                        alert("count2"+count2);
+                        alert($(".checkbox").hasClass('shopcar-checkd').length);
+                    }
+                });
+                alert(count);
+//                 for(var i=0;i<count.length;i++) {
+// alert("jinru");
+//                 }
+
+
+//                 // if(idsstr.length > 0) //如果获取到
+//                 //     idsstr = idsstr.substring(0, idsstr.length - 1); //把最后一个逗号去掉
+//                 // if(zhi.length > 0) //如果获取到
+//                 //     zhi = zhi.substring(0, zhi.length - 1); //把最后一个逗号去掉
+//                 alert("所有checkbox的值：" + idsstr);
+//                 alert("被选中checkbox的值：" + zhi);
+//              //   document.getElementById("fm1").action="<%=path%>/delTrain?zhi="+zhi
+//              //   document.getElementById("fm1").submit();
+//              //   document.form.action="<%=path%>/delete1/?zhi="+zhi
+// //	document.form.submit()
+            });
+        }
+
     </script>
 
 </div>
