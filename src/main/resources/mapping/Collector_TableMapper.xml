@@ -16,32 +16,24 @@
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
-    from collector
-
-_table
+    from collector_table
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
-    delete from collector
-
-_table
+    delete from collector_table
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.Collector_Table" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into collector
-
-_table (poduct_spu_id, price, wx_user_id
+    insert into collector_table (poduct_spu_id, price, wx_user_id
       )
     values (#{poductSpuId,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{wxUserId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.Collector_Table" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into collector
-
-_table
+    insert into collector_table
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="poductSpuId != null">
         poduct_spu_id,
@@ -67,9 +59,7 @@ _table
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.Collector_Table">
     <!--@mbg.generated-->
-    update collector
-
-_table
+    update collector_table
     <set>
       <if test="poductSpuId != null">
         poduct_spu_id = #{poductSpuId,jdbcType=INTEGER},
@@ -85,17 +75,17 @@ _table
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.Collector_Table">
     <!--@mbg.generated-->
-    update collector
-
-_table
+    update collector_table
     set poduct_spu_id = #{poductSpuId,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
       wx_user_id = #{wxUserId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  /**
-  * 查询所有收藏商品
-  */
+
+  <!--查询所有收藏商品-->
+  <resultMap id="selectAllCollectorMap" type="map"></resultMap>
+  <select id="selectAllCollector" resultMap="selectAllCollectorMap"></select>
+
 
 
 </mapper>
