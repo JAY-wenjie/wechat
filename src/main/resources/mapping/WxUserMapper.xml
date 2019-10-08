@@ -50,7 +50,7 @@
       #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR},
       #{province,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, 
       #{subscribetime,jdbcType=TIMESTAMP}, #{unionid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{groupid,jdbcType=VARCHAR}.#{money,jdbcType=INTEGER}})
+      #{groupid,jdbcType=VARCHAR},#{money,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.WxUser" useGeneratedKeys="true">
     <!--@mbg.generated-->

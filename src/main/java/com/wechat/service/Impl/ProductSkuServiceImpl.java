@@ -1,5 +1,6 @@
 package com.wechat.service.Impl;
 
+import com.wechat.domain.model.AttrBean;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.wechat.domain.model.ProductSku;
@@ -58,6 +59,21 @@ public class ProductSkuServiceImpl implements ProductSkuService{
     @Override
     public List<Map<String,Object>> selectSkuImgById(int skuId) {
         return productSkuMapper.selectSkuImgById(skuId);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectSkuAttrBySpuId(int spuId) {
+        return productSkuMapper.selectSkuAttrBySpuId(spuId);
+    }
+
+    @Override
+    public List<AttrBean> selectAttrBySpuId(int spuId) {
+        return productSkuMapper.selectAttrBySpuId(spuId);
+    }
+
+    @Override
+    public List<ProductSku> selectColorsBySpuId(int spuId) {
+        return productSkuMapper.selectColorsBySpuId(spuId);
     }
 
 }

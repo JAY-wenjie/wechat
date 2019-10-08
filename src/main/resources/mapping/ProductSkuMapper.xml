@@ -169,21 +169,21 @@
     </resultMap>
     <select id="selectSkuBySpuId" resultMap="selectSkuBySpuIdresultMap">
         select a.id,
-               a.product_spu_id,
-               a.price,
-               a.sale_price,
-               a.active_price,
-               a.`status`,
-               a.color,
-               a.sku_img,
-               a.amount,
-               c.`value`
+        a.product_spu_id,
+        a.price,
+        a.sale_price,
+        a.active_price,
+        a.`status`,
+        a.color,
+        a.sku_img,
+        a.amount,
+        c.`value`
         from product_sku a
-                 INNER JOIN product_attr b on b.product_sku_id = a.id and a.`status` = 0
-                 inner join attr_value c on b.attr_value_id = c.id and a.product_spu_id = #{spuId} and a.price =
-                                                                                                 (select MIN(price)
-                                                                                                  from product_sku d
-                                                                                                  WHERE d.product_spu_id = a.product_spu_id)
+        INNER JOIN product_attr b on b.product_sku_id = a.id and a.`status` = 0
+        inner join attr_value c on b.attr_value_id = c.id and a.product_spu_id = #{spuId} and a.price =
+        (select MIN(price)
+        from product_sku d
+        WHERE d.product_spu_id = a.product_spu_id) AND a.id in (SELECT MIN(id) from product_sku GROUP BY color)
 
     </select>
 
@@ -194,5 +194,42 @@
     </resultMap>
     <select id="selectSkuImgById" resultMap="selectSkuImgByIdresultMap">
         select id,src,`status` from product_img a where product_sku_id = #{skuId};
+    </select>
+    <resultMap id="selectSkuAttrBySpuIdresultMap" type="map">
+        <id column="id" property="spuId"></id>
+        <result column="price" property="price"></result>
+        <result column="color" property="color"></result>
+        <result column="value" property="size"></result>
+    </resultMap>
+    <select id="selectSkuAttrBySpuId" resultMap="selectSkuAttrBySpuIdresultMap">
+        select a.product_spu_id,a.price,a.color,c.`value`
+        from product_sku a
+        INNER JOIN product_attr b on a.id = b.product_sku_id
+        INNER JOIN attr_value c on b.attr_value_id = c.id and a.product_spu_id = #{spuId};
+    </select>
+
+    <resultMap id="selectAttrBySpuIdresultMap" type="AttrBean">
+
+        <result column="name" property="name"></result>
+        <collection property="valueList" ofType="map">
+            <id column="attr_value_id" property="attrValueId"></id>
+            <result column="value" property="size"></result>
+        </collection>
+    </resultMap>
+    <select id="selectAttrBySpuId" resultMap="selectAttrBySpuIdresultMap">
+        select c.`name`,a.attr_value_id,b.`value`
+        from product_spu_attr a
+        inner join attr_value b on a.attr_value_id
+        = b.id and a.spu_id = #{spuId}
+        inner join attribute c on b.attribute_id = c.id
+    </select>
+    <resultMap id="selectColorsBySpuIdresultMap" type="com.wechat.domain.model.ProductSku">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="color" jdbcType="VARCHAR" property="color"/>
+    </resultMap>
+    <select id="selectColorsBySpuId" parameterType="java.lang.Integer" resultMap="selectColorsBySpuIdresultMap">
+        select id,color from product_sku where product_spu_id = #{spuId} AND id in (select min(id) from product_sku
+        GROUP BY color)
     </select>
 </mapper>

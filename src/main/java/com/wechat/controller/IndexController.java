@@ -42,17 +42,5 @@ public class IndexController {
         return new JsonBean(-1,null,"网络波动获取数据失败，请退出重试！");
     }
 
-    @RequestMapping("getskubyspuid")
-    public JsonBean getSkuBySpuId(Integer spuId){
-        Map<String, Object> productSku = productSkuService.selectSkuBySpuId(spuId);
-        System.out.println(productSku.toString());
-        if(productSku!=null){
-            List<Map<String,Object>> skuImgs = productSkuService.selectSkuImgById((Integer) productSku.get("id"));
-            PoductSpu poductSpu = poductSpuService.selectByPrimaryKey(spuId);
-            productSku.put("skuImgs",skuImgs);
-            productSku.put("spu",poductSpu);
-            return new JsonBean(0,productSku,"success");
-        }
-        return new JsonBean(-1,null,"网络波动获取数据失败，请退出重试！");
-    }
+
 }
