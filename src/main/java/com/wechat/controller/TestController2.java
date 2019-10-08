@@ -75,7 +75,7 @@ public class TestController2 {
      * 返回1表示领取成功,返回0表示领取失败
      */
     @RequestMapping(value = "addcoupons")
-    public boolean addcoupons(Integer id, Integer score,HttpSession session) {
+    public boolean addcoupons(Integer id, Integer score, HttpSession session) {
         //获取用户信息
         WxUser wxUser = (WxUser) session.getAttribute("wxuser");
         DiscountCoupon discountCoupon = new DiscountCoupon(id, score);
@@ -120,7 +120,7 @@ public class TestController2 {
      * by杨思源
      */
     @RequestMapping(value = "addgoods")
-    public boolean addgoods(Integer id,HttpSession session) {
+    public boolean addgoods(Integer id, HttpSession session) {
         //获取用户信息
         WxUser wxUser = (WxUser) session.getAttribute("wxuser");
         boolean flag = scoreSpuService.addgoods(wxUser, id);
@@ -149,4 +149,23 @@ public class TestController2 {
         return discountCoupons;
     }
 
+    /**
+     * 根据商品积分查询可兑换的商品
+     * by杨思源
+     */
+    @RequestMapping(value = "scoregoods")
+    public List<ScoreSpu> scoregoods(Integer score) {
+        System.out.println(score);
+        List<ScoreSpu> scoreSpus = scoreSpuService.selectByscore(score);
+        return scoreSpus;
+    }
+    /**
+     * 根据商品评价查询可兑换的商品
+     * by杨思源
+     */
+    @RequestMapping(value = "goodscomment")
+    public List<ScoreSpu> goodscomment(Integer low,Integer high) {
+        List<ScoreSpu> scoreSpus = scoreSpuService.selectBycomment(low,high);
+        return scoreSpus;
+    }
 }

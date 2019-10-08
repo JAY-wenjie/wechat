@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ScoreSpuServiceImpl implements ScoreSpuService {
@@ -47,7 +49,7 @@ public class ScoreSpuServiceImpl implements ScoreSpuService {
         //如果用户积分大于等于商品积分,则兑换成功,返回true
         if (userScore.getScore() >= scoreSpu.getSocre()) {
             //用户积分减少
-            UserScore userScore1 = new UserScore(1,wxUser.getId(),scoreSpu.getSocre(),1,date);
+            UserScore userScore1 = new UserScore(1, wxUser.getId(), scoreSpu.getSocre(), 1, date);
             userScoreMapper.reduceUserScores(userScore1);
             //用户积分详情表记录这次兑换
             ScoreInfo scoreInfo = new ScoreInfo(userScore.getId(), id, "用户兑换商品,积分-" + scoreSpu.getSocre(), date);
@@ -59,5 +61,20 @@ public class ScoreSpuServiceImpl implements ScoreSpuService {
             //如果用户积分小于商品积分,则兑换失败,返回false
             return false;
         }
+    }
+
+    @Override
+    public List<ScoreSpu> selectByscore(Integer score) {
+        List<ScoreSpu> scoreSpus = scoreSpuMapper.selectByscore(score);
+        return scoreSpus;
+    }
+
+    @Override
+    public List<ScoreSpu> selectBycomment(Integer low,Integer high) {
+        Map<String,Integer> map=new HashMap<>();
+        map.put("low",low);
+        map.put("high",high);
+        List<ScoreSpu> scoreSpus=scoreSpuMapper.selectBycomment(map);
+        return scoreSpus;
     }
 }
