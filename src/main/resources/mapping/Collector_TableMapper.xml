@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.domain.mapper.Collector_TableMapper">
+  <resultMap id="BaseResultMap" type="com.wechat.domain.model.Collector_Table">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="poduct_spu_id" jdbcType="INTEGER" property="poductSpuId" />
+    <result column="Price" jdbcType="INTEGER" property="price" />
+    <result column="wx_user_id" jdbcType="INTEGER" property="wxUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, poduct_spu_id, Price, wx_user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from collector
+
+_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from collector
+
+_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.Collector_Table" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into collector
+
+_table (poduct_spu_id, Price, wx_user_id
+      )
+    values (#{poductSpuId,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{wxUserId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wechat.domain.model.Collector_Table" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into collector
+
+_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="poductSpuId != null">
+        poduct_spu_id,
+      </if>
+      <if test="price != null">
+        Price,
+      </if>
+      <if test="wxUserId != null">
+        wx_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="poductSpuId != null">
+        #{poductSpuId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="wxUserId != null">
+        #{wxUserId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.Collector_Table">
+    <!--@mbg.generated-->
+    update collector
+
+_table
+    <set>
+      <if test="poductSpuId != null">
+        poduct_spu_id = #{poductSpuId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        Price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="wxUserId != null">
+        wx_user_id = #{wxUserId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.Collector_Table">
+    <!--@mbg.generated-->
+    update collector
+
+_table
+    set poduct_spu_id = #{poductSpuId,jdbcType=INTEGER},
+      Price = #{price,jdbcType=INTEGER},
+      wx_user_id = #{wxUserId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
