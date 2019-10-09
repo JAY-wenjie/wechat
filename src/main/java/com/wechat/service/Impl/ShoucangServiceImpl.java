@@ -5,6 +5,10 @@ import javax.annotation.Resource;
 import com.wechat.domain.model.Shoucang;
 import com.wechat.domain.mapper.ShoucangMapper;
 import com.wechat.service.ShoucangService;
+
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class ShoucangServiceImpl implements ShoucangService{
 
@@ -39,6 +43,16 @@ public class ShoucangServiceImpl implements ShoucangService{
     @Override
     public int updateByPrimaryKey(Shoucang record) {
         return shoucangMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectAllByWxid(int id) {
+        return shoucangMapper.selectAllByWxid(id);
+    }
+
+    @Override
+    public Shoucang selectShoucangByWxid(int id) {
+        return shoucangMapper.selectShoucangByWxid(id);
     }
 
 }

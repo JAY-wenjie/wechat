@@ -18,6 +18,43 @@
 	$(window).load(function(){
 		$(".loading").addClass("loader-chanage")
 		$(".loading").fadeOut(300)
+        /**
+		 * 查询收藏商品
+		 * 肖琦
+         */
+        $.ajax({
+            type: "post",
+            url: "http://31rmda2.hn3.mofasuidao.cn/wechat/selectAllByWxid.do",
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                if (data.code!=-1){
+                    var a=""
+                    for (var i=0;i<data.data.length;i++){
+                        a+="<div class=\"list clearfloat box-s\">\n" +
+                            "\t    \t\t\t<a href='pro-detail.html/spu_id="+data.data[i].poduct_spu_id+"'>\n" +
+                            "\t\t    \t\t\t<div class=\"tu clearfloat fl\">\n" +
+                            "\t\t    \t\t\t\t<img src="+data.data[i].product_spu_img+"/>\n" +
+                            "\t\t    \t\t\t</div>\n" +
+                            "\t\t    \t\t\t<div class=\"ctent clearfloat fl\">\n" +
+                            "\t\t    \t\t\t\t<p class=\"tit\">"+data.data[i].product_name+"</p>\n" +
+                            "\t\t\t\t\t\t\t<p class=\"fu-tit\">\n" +
+                            "\t\t\t\t\t\t\t\t"+data.data[i].product_name+"\n" +
+                            "\t\t\t\t\t\t\t</p>\n" +
+                            "\t\t    \t\t\t\t<div class=\"price clearfloat\">\n" +
+                            "\t\t    \t\t\t\t\t<span class=\"fl\"><samp>¥</samp>"+data.data[i].price/100+"</span>\n" +
+                            "\t\t    \t\t\t\t\t<i class=\"iconfont icon-shenglve fr\"></i>\n" +
+                            "\t\t    \t\t\t\t</div>\n" +
+                            "\t\t    \t\t\t</div>\n" +
+                            "\t    \t\t\t</a>\n" +
+                            "\t    \t\t</div>"
+					}
+					$("#shoucang").append(a);
+				}else {
+                    alert("您还未登录")
+				}
+            }
+        })
 	})
 </script>
 </head>
@@ -40,160 +77,8 @@
 			<p>我的收藏</p>
 	    </header>
 	    <div id="main" class="mui-clearfix">
-	    	<div class="collection clearfloat">
-	    		<div class="list clearfloat box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu clearfloat fl">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="ctent clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<div class="price clearfloat">
-		    					<span class="fl"><samp>¥</samp>299</span>
-		    					<i class="iconfont icon-shenglve fr"></i>
-		    				</div>
-		    			</div>
-	    			</a>
-	    		</div>
-	    		<div class="list clearfloat box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu clearfloat fl">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="ctent clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<div class="price clearfloat">
-		    					<span class="fl"><samp>¥</samp>299</span>
-		    					<i class="iconfont icon-shenglve fr"></i>
-		    				</div>
-		    			</div>
-	    			</a>
-	    		</div>
-	    		<div class="list clearfloat box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu clearfloat fl">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="ctent clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<div class="price clearfloat">
-		    					<span class="fl"><samp>¥</samp>299</span>
-		    					<i class="iconfont icon-shenglve fr"></i>
-		    				</div>
-		    			</div>
-	    			</a>
-	    		</div>
-	    		<div class="list clearfloat box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu clearfloat fl">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="ctent clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<div class="price clearfloat">
-		    					<span class="fl"><samp>¥</samp>299</span>
-		    					<i class="iconfont icon-shenglve fr"></i>
-		    				</div>
-		    			</div>
-	    			</a>
-	    		</div>
-	    		<div class="list clearfloat box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu clearfloat fl">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="ctent clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<div class="price clearfloat">
-		    					<span class="fl"><samp>¥</samp>299</span>
-		    					<i class="iconfont icon-shenglve fr"></i>
-		    				</div>
-		    			</div>
-	    			</a>
-	    		</div>
-	    		<div class="list clearfloat box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu clearfloat fl">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="ctent clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<div class="price clearfloat">
-		    					<span class="fl"><samp>¥</samp>299</span>
-		    					<i class="iconfont icon-shenglve fr"></i>
-		    				</div>
-		    			</div>
-	    			</a>
-	    		</div>
-	    		<div class="list clearfloat box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu clearfloat fl">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="ctent clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<div class="price clearfloat">
-		    					<span class="fl"><samp>¥</samp>299</span>
-		    					<i class="iconfont icon-shenglve fr"></i>
-		    				</div>
-		    			</div>
-	    			</a>
-	    		</div>
-	    		<div class="list clearfloat box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu clearfloat fl">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="ctent clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<div class="price clearfloat">
-		    					<span class="fl"><samp>¥</samp>299</span>
-		    					<i class="iconfont icon-shenglve fr"></i>
-		    				</div>
-		    			</div>
-	    			</a>
-	    		</div>
-	    		<div class="list clearfloat box-s">
-	    			<a href="pro-detail.html">
-		    			<div class="tu clearfloat fl">
-		    				<img src="upload/2.jpg"/>
-		    			</div>
-		    			<div class="ctent clearfloat fl">
-		    				<p class="tit">XXX夏季女装性感流行</p>
-							<p class="fu-tit">
-								粉红性感流行L尺寸
-							</p>
-		    				<div class="price clearfloat">
-		    					<span class="fl"><samp>¥</samp>299</span>
-		    					<i class="iconfont icon-shenglve fr"></i>
-		    				</div>
-		    			</div>
-	    			</a>
-	    		</div>
+	    	<div class="collection clearfloat" id="shoucang">
+
 	    	</div>
 	    </div>
 	</body>

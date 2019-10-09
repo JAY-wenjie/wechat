@@ -19,6 +19,21 @@
         $(window).load(function () {
             $(".loading").addClass("loader-chanage")
             $(".loading").fadeOut(300)
+
+            //判断商品是否收藏
+            $.ajax({
+                type: "post",
+                url: "http://31rmda2.hn3.mofasuidao.cn/wechat/selectShoucangByWxid.do",
+                dataType: "json",
+                success: function (data) {
+                    if (data.code!=-1){
+                        $(".icon-shoucang").css("color","red");
+                    }else {
+                        $(".icon-shoucang").style.color="#3012ff";
+                    }
+                }
+            })
+
             //alert(location.href.split("?")[1]);
             //当前商品skuid
             var skuId;
@@ -147,7 +162,7 @@
             <!--<samp>￥208元</samp>-->
         </div>
         <div class="right clearfloat fr">
-            <i class="iconfont icon-shoucang"></i>
+            <i class="iconfont icon-shoucang" id="shoucang"></i>
             <p class="">收藏</p>
         </div>
     </div>
@@ -296,6 +311,7 @@
 <script src="js/global.js"></script>
 <script>
     $(function () {
+
         var banner = new Swiper('.banner', {
             autoplay: 5000,
             pagination: '.swiper-pagination',
@@ -332,6 +348,8 @@
             }
 
         });
+
+
 
     });
 </script>

@@ -81,4 +81,24 @@
       wx_user_id = #{wxUserId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="selectAllByWxidMap" type="map">
+    <id column="id" property="id"></id>
+    <result column="poduct_spu_id" property="poduct_spu_id"></result>
+    <result column="price" property="price"></result>
+    <result column="product_name" property="product_name"></result>
+    <result column="product_spu_img" property="product_spu_img"></result>
+
+  </resultMap>
+  <select id="selectAllByWxid" resultMap="selectAllByWxidMap">
+    SELECT a.id,a.poduct_spu_id,a.price,b.product_name,b.product_spu_img
+    FROM shoucang a left JOIN poduct_spu b on a.poduct_spu_id=b.id where a.wx_user_id=#{id}
+
+  </select>
+  <select id="selectShoucangByWxid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from shoucang
+    where wx_user_id = #{id}
+  </select>
+
 </mapper>
