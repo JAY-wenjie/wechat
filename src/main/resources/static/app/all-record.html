@@ -18,34 +18,31 @@
         $(window).load(function () {
             $(".loading").addClass("loader-chanage");
             $(".loading").fadeOut(300);
-
-            //展示出所有的商品
-            function list() {
-                $.ajax({
-                    debug: true,
-                    type: "post",
-                    url: "http://05ualz4.hn3.mofasuidao.cn/wechat/scoreSpus.do",
-                    async: false,
-                    success: function (data) {
-                        var str = "";
-                        for (var i = 0; i < data.length; i++) {
-                            str += "<div class=\"list clearfloat fl box-s\">\n" +
-                                "            <div class=\"tu clearfloat fl\">\n" +
-                                "                <img src=\"upload/2.jpg\"/>\n" +
-                                "            </div>\n" +
-                                "            <div class=\"middle fl clearfloat\">\n" +
-                                "                <p class=\"tit\">" + data[i].productName + "</p>\n" +
-                                "                <p class=\"price\"><span>" + data[i].socre + "</span>积分</p>\n" +
-                                "            </div>\n" +
-                                "            <a href=\"integral-detail.html?id=" + data[i].id + "\" class=\"all-btn clearfloat fr\">\n" +
-                                "                兑换\n" +
-                                "            </a>\n" +
-                                "        </div>";
-                        }
-                        $("#goods").append(str);
+            $.ajax({
+                debug: true,
+                type: "post",
+                url: "http://05ualz4.hn3.mofasuidao.cn/wechat/scoreSpus.do",
+                async: false,
+                success: function (data) {
+                    var str = "";
+                    for (var i = 0; i < data.length; i++) {
+                        str += "<div class=\"list clearfloat fl box-s\">\n" +
+                            "            <div class=\"tu clearfloat fl\">\n" +
+                            "                <img src=\"upload/2.jpg\"/>\n" +
+                            "            </div>\n" +
+                            "            <div class=\"middle fl clearfloat\">\n" +
+                            "                <p class=\"tit\">" + data[i].productName + "</p>\n" +
+                            "                <p class=\"price\"><span>" + data[i].socre + "</span>积分</p>\n" +
+                            "            </div>\n" +
+                            "            <a href=\"integral-detail.html?id=" + data[i].id + "\" class=\"all-btn clearfloat fr\">\n" +
+                            "                兑换\n" +
+                            "            </a>\n" +
+                            "        </div>";
                     }
-                })
-            }
+                    $("#goods").append(str);
+                }
+            })
+
         })
 
         //根据商品积分查询商品
@@ -82,6 +79,7 @@
 
         //根据商品评分查询商品
         function comment(low, high) {
+            alert(low+"2222"+high);
             $.ajax({
                 debug: true,
                 type: "post",
