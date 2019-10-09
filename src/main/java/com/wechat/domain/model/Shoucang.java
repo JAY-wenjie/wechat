@@ -1,6 +1,6 @@
 package com.wechat.domain.model;
 
-public class Collector_Table {
+public class Shoucang {
     private Integer id;
 
     /**
