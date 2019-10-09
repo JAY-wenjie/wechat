@@ -72,7 +72,6 @@ public class Constant {
         map.put("timestamp",String.valueOf(timestamp));
         map.put("nonceStr",noncestr);
         map.put("signature",signature);
-
         return map;
     }
 }

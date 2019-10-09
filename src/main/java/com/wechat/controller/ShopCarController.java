@@ -191,14 +191,12 @@ public class ShopCarController {
     }
 
     @RequestMapping("insertCar")
-
     public JsonBean insertCar(WxUser wxUser,ProductCar productCar,int num, int skuid){
     productCar.setUserId(wxUser.getId());
     productCar.setProductSkuId(skuid);
-    productCar.setStatue(-1);
     productCar.setProductSkuNum(num);
        int a=     productCarService.insert(productCar);
-        System.out.println(a);
+        System.out.println("加入成功："+a);
         return  new JsonBean(0,a,"success");
     }
 }

@@ -30,12 +30,12 @@
                             }
 
                             for(var j=0;j<data.data[i].menu.length;j++) {
-                                b =b+ "<h3 class><em></em>" + data.data[i].menu[j].bname + "</h3>\n" +
+                                b =b+ "<h3 class onclick='javascript:b(this);'><em></em>" + data.data[i].menu[j].bname + "</h3>\n" +
                                     "<div class=\"slist clearfloat box-s\">";
                                 for (var n = 0; n < data.data[i].menu[j].spu.length; n++) {
                                     b =b+ "<div class=\"list clearfloat fl\">\n" +
                                         "\t\t\t\t\t\t\t<a href='pro-detail.html?id="+data.data[i].menu[j].spu.cid+"'>\n" +
-                                        "\t\t\t\t\t\t\t\t<img src="+ data.data[i].menu[j].spu[n].product_spu_img+"/>\n" +
+                                        "\t\t\t\t\t\t\t\t<img src="+ data.data[i].menu[j].spu[n].product_spu_img+" />\n" +
                                         "\t\t\t\t\t\t\t\t<p class=\"tit\">"+data.data[i].menu[j].spu[n].product_name+"</p>\n" +
                                         "\t\t\t\t\t\t\t</a>\n" +
                                         "\t\t\t\t\t\t</div>";
@@ -47,6 +47,7 @@
                             $("#menu0").append(b);
                         }
                     }
+
                 }
             })
         })
@@ -55,7 +56,10 @@
             $(a).addClass('active');
             $("#"+id+"").siblings('section').css("display","none");
             $("#"+id+"").css("display","block");
-
+        }
+        function b(b) {
+            $(b).next().css("display","block");
+            $(b).siblings('h3').next().css("display","none");
         }
 	</script>
 	<link rel="stylesheet" type="text/css" href="css/base.css"/>
