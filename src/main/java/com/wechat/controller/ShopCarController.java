@@ -134,18 +134,19 @@ public class ShopCarController {
         return list(zhi,listSku,productCar,poductSpu,listSpu,listattr);
     }
 
-    @RequestMapping("insertCar")
 
-    public JsonBean insertCar(WxUser wxUser,ProductCar productCar,int num, int skuid){
-    productCar.setUserId(wxUser.getId());
-    productCar.setProductSkuId(skuid);
-    productCar.setStatue(-1);
-    productCar.setProductSkuNum(num);
-       int a=   productCarService.insert(productCar);
-        System.out.println(a);
-        return  new JsonBean(0,a,"success");
-    }
-    public Map<String,Object> list(String zhi,List<ProductSku> listSku,ProductCar productCar,PoductSpu poductSpu,List<PoductSpu>listSpu,List<ProductSku> listattr){
+        @RequestMapping("insertCar")
+        public JsonBean insertCar(WxUser wxUser,ProductCar productCar,int num, int skuid){
+            productCar.setUserId(wxUser.getId());
+            productCar.setProductSkuId(skuid);
+            productCar.setProductSkuNum(num);
+            int a=   productCarService.insert(productCar);
+            System.out.println("加入成功："+a);
+            return  new JsonBean(0,a,"success");
+        }
+
+
+    public Map<String,Object> list(String zhi,List<ProductSku> listSku,ProductCar productCar,PoductSpu poductSpu,List<PoductSpu>listSpu,List<ProductSku> listattr) {
         String[] zhi1 = zhi.split("undefined")[1].split(",");
         //循环输出数字信息 长度为数组的长度
         System.out.println(zhi1);
@@ -200,7 +201,7 @@ public class ShopCarController {
 //
         map.put("productCar", productCar);
         //根据选中的状态的商品查询购物车信息
-        List<ProductCar> listcar=productCarService.selectBystatue(0);
+        List<ProductCar> listcar = productCarService.selectBystatue(0);
         //数量
         int count = 0;
         for (int i = 0; i < listcar.size(); i++) {
@@ -214,17 +215,8 @@ public class ShopCarController {
         map.put("sum", 99);
         int jifen = (int) (99 * (0.75));
         map.put("jifen", jifen);
-        map.put("listcar",listcar);
-        map.put("listattr",listattr);
-            return  map;
-
-    @RequestMapping("insertCar")
-    public JsonBean insertCar(WxUser wxUser,ProductCar productCar,int num, int skuid){
-    productCar.setUserId(wxUser.getId());
-    productCar.setProductSkuId(skuid);
-    productCar.setProductSkuNum(num);
-       int a=     productCarService.insert(productCar);
-        System.out.println("加入成功："+a);
-        return  new JsonBean(0,a,"success");
+        map.put("listcar", listcar);
+        map.put("listattr", listattr);
+        return map;
     }
 }

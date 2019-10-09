@@ -13,10 +13,6 @@
     <result column="sku_img" jdbcType="VARCHAR" property="skuImg" />
     <result column="amount" jdbcType="INTEGER" property="amount" />
   </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, product_spu_id, price, sale_price, active_price, `status`, color, sku_img, amount
-  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
@@ -36,17 +32,6 @@ where status=#{status}
     delete from product_sku
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wechat.domain.model.ProductSku">
-    <!--@mbg.generated-->
-    insert into product_sku (id, product_spu_id, price, 
-      sale_price, active_price, `status`, 
-      color, sku_img, amount
-      )
-    values (#{id,jdbcType=INTEGER}, #{productSpuId,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
-      #{salePrice,jdbcType=INTEGER}, #{activePrice,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
-      #{color,jdbcType=VARCHAR}, #{skuImg,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.wechat.domain.model.ProductSku">
     <!--@mbg.generated-->
     insert into product_sku
@@ -109,37 +94,7 @@ where status=#{status}
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.ProductSku">
-    <!--@mbg.generated-->
-    update product_sku
-    <set>
-      <if test="productSpuId != null">
-        product_spu_id = #{productSpuId,jdbcType=INTEGER},
-      </if>
-      <if test="price != null">
-        price = #{price,jdbcType=INTEGER},
-      </if>
-      <if test="salePrice != null">
-        sale_price = #{salePrice,jdbcType=INTEGER},
-      </if>
-      <if test="activePrice != null">
-        active_price = #{activePrice,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="color != null">
-        color = #{color,jdbcType=VARCHAR},
-      </if>
-      <if test="skuImg != null">
-        sku_img = #{skuImg,jdbcType=VARCHAR},
-      </if>
-      <if test="amount != null">
-        amount = #{amount,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
   <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.ProductSku">
     <!--@mbg.generated-->
     update product_sku
@@ -179,41 +134,22 @@ where status=#{status}
       </association>
     </association>
   </resultMap>
-    <resultMap id="BaseResultMap" type="com.wechat.domain.model.ProductSku">
-        <!--@mbg.generated-->
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="product_spu_id" jdbcType="INTEGER" property="productSpuId"/>
-        <result column="price" jdbcType="INTEGER" property="price"/>
-        <result column="sale_price" jdbcType="INTEGER" property="salePrice"/>
-        <result column="active_price" jdbcType="INTEGER" property="activePrice"/>
-        <result column="status" jdbcType="VARCHAR" property="status"/>
-        <result column="color" jdbcType="VARCHAR" property="color"/>
-        <result column="sku_img" jdbcType="VARCHAR" property="skuImg"/>
-        <result column="amount" jdbcType="INTEGER" property="amount"/>
-    </resultMap>
+    <!--<resultMap id="BaseResultMap" type="com.wechat.domain.model.ProductSku">-->
+        <!--&lt;!&ndash;@mbg.generated&ndash;&gt;-->
+        <!--<id column="id" jdbcType="INTEGER" property="id"/>-->
+        <!--<result column="product_spu_id" jdbcType="INTEGER" property="productSpuId"/>-->
+        <!--<result column="price" jdbcType="INTEGER" property="price"/>-->
+        <!--<result column="sale_price" jdbcType="INTEGER" property="salePrice"/>-->
+        <!--<result column="active_price" jdbcType="INTEGER" property="activePrice"/>-->
+        <!--<result column="status" jdbcType="VARCHAR" property="status"/>-->
+        <!--<result column="color" jdbcType="VARCHAR" property="color"/>-->
+        <!--<result column="sku_img" jdbcType="VARCHAR" property="skuImg"/>-->
+        <!--<result column="amount" jdbcType="INTEGER" property="amount"/>-->
+    <!--</resultMap>-->
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
         id, product_spu_id, price, sale_price, active_price, `status`, color, sku_img, amount
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        <!--@mbg.generated-->
-        select
-        <include refid="Base_Column_List"/>
-        from product_sku
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <select id="selectByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        <!--@mbg.generated-->
-        select
-        <include refid="Base_Column_List"/>
-        from product_sku
-        where status=#{status}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        <!--@mbg.generated-->
-        delete from product_sku
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
     <insert id="insert" parameterType="com.wechat.domain.model.ProductSku">
         <!--@mbg.generated-->
         insert into product_sku (id, product_spu_id, price,
@@ -224,68 +160,6 @@ where status=#{status}
         #{salePrice,jdbcType=INTEGER}, #{activePrice,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR},
         #{color,jdbcType=VARCHAR}, #{skuImg,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}
         )
-    </insert>
-    <insert id="insertSelective" parameterType="com.wechat.domain.model.ProductSku">
-        <!--@mbg.generated-->
-        insert into product_sku
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="productSpuId != null">
-                product_spu_id,
-            </if>
-            <if test="price != null">
-                price,
-            </if>
-            <if test="salePrice != null">
-                sale_price,
-            </if>
-            <if test="activePrice != null">
-                active_price,
-            </if>
-            <if test="status != null">
-                `status`,
-            </if>
-            <if test="color != null">
-                color,
-            </if>
-            <if test="skuImg != null">
-                sku_img,
-            </if>
-            <if test="amount != null">
-                amount,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="productSpuId != null">
-                #{productSpuId,jdbcType=INTEGER},
-            </if>
-            <if test="price != null">
-                #{price,jdbcType=INTEGER},
-            </if>
-            <if test="salePrice != null">
-                #{salePrice,jdbcType=INTEGER},
-            </if>
-            <if test="activePrice != null">
-                #{activePrice,jdbcType=INTEGER},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=VARCHAR},
-            </if>
-            <if test="color != null">
-                #{color,jdbcType=VARCHAR},
-            </if>
-            <if test="skuImg != null">
-                #{skuImg,jdbcType=VARCHAR},
-            </if>
-            <if test="amount != null">
-                #{amount,jdbcType=INTEGER},
-            </if>
-        </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.wechat.domain.model.ProductSku">
         <!--@mbg.generated-->
@@ -318,19 +192,7 @@ where status=#{status}
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.wechat.domain.model.ProductSku">
-        <!--@mbg.generated-->
-        update product_sku
-        set product_spu_id = #{productSpuId,jdbcType=INTEGER},
-        price = #{price,jdbcType=INTEGER},
-        sale_price = #{salePrice,jdbcType=INTEGER},
-        active_price = #{activePrice,jdbcType=INTEGER},
-        `status` = #{status,jdbcType=VARCHAR},
-        color = #{color,jdbcType=VARCHAR},
-        sku_img = #{skuImg,jdbcType=VARCHAR},
-        amount = #{amount,jdbcType=INTEGER}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+
 
 
     <resultMap id="selectSkuBySpuIdresultMap" type="map">
