@@ -27,6 +27,8 @@ public class OrderController {
     OrderInfoService orderInfoService;
     @Autowired
     ProductSkuService productSkuService;
+
+
 @Autowired
 ProductCarService productCarService;
     @RequestMapping(value = "insertorder")
@@ -48,15 +50,15 @@ ProductCarService productCarService;
         Order order = new Order();
       //  order.setId(2);
         //将获取的用户信息填入订单userid
-        order.setUserId(77);
+        order.setUserId(36);
         Date date = new Date();
         java.sql.Date date1=new java.sql.Date(date.getTime());
         //当前时间
         order.setCreatTime(date1);
 
         System.out.println("date" + date1);
-        order.setPayTime(date1);
-        order.setEndTime(date1);
+//        order.setPayTime();
+//        order.setEndTime(date1);
       // int sum =(int)session.getAttribute("sum");
         order.setSumPrice(66);
 
@@ -79,6 +81,13 @@ ProductCarService productCarService;
             orderInfo.setPayPrice(99);
             int b = orderInfoService.insert(orderInfo);
             System.out.println("b" + b);
+      ProductSku productSku= productSkuService.selectByPrimaryKey(carList.get(i).getId());
+      int amount=productSku.getAmount();
+      int num=carList.get(i).getProductSkuNum();
+      int amount2=amount-num;
+      productSku.setAmount(amount2);
+      int c=productSkuService.updateByPrimaryKeySelective(productSku);
+            System.out.println("c"+c);
         }
 
         return "";

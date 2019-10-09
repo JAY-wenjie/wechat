@@ -18,8 +18,15 @@
 	$(window).load(function(){
 		$(".loading").addClass("loader-chanage")
 		$(".loading").fadeOut(300)
+
 	})
 </script>
+    <script type="text/javascript">
+        function a() {
+            alert("支付成功");
+
+        }
+    </script>
 </head>
 <!--loading页开始-->
 <div class="loading">
@@ -101,7 +108,7 @@
 					</section>
 	    		</div>
 	    	</div>
-	    	<a href="#" class="tui-btn">
+	    	<a href="#" onclick="a()" class="tui-btn">
 				确认支付
 			</a>
 	    </div>

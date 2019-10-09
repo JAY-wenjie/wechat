@@ -40,7 +40,7 @@ public class ShopCarController {
      * @return
      */
     @RequestMapping(value = "selCar", method = RequestMethod.POST)
-    public List<ProductCar> selCar(WxUser wxUser, HttpSession session) {
+    public Map <String,Object> selCar(WxUser wxUser, HttpSession session) {
         //获取用户信息（id）
     //    wxUser = (WxUser) session.getAttribute("Wxuser");
 //根据用户id查询所绑定的该用户的购物车信息
@@ -62,9 +62,18 @@ public class ShopCarController {
         //将总价放入session 方便后面获取
     //    session.setAttribute("sum", sum);
         //返回购物车信息结合
+        List<ProductSku> listattr=new ArrayList<>();
         System.out.println(productCarList.size());
+        for (int i = 0; i < productCarList.size(); i++){
+        int a=    productCarList.get(i).getProductSkuId();
+         ProductSku productSkuattr=    productSkuService.selByAttr(a);
+         listattr.add(i,productSkuattr);
+        }
+        Map <String,Object> map=new HashMap<>();
+        map.put("productCarList",productCarList);
+        map.put("listattr",listattr);
 
-        return productCarList;
+        return map;
     }
 
     /**
@@ -81,15 +90,66 @@ public class ShopCarController {
         //获取用户信息（id）
         System.out.println("进入");
      //   wxUser = (WxUser) session.getAttribute("Wxuser");
-        zhi="1,2,3";
+        session.setAttribute("zhi",zhi);
+        List<ProductSku> listattr=new ArrayList<>();
         List<ProductSku> listSku = new ArrayList<>();
         List<PoductSpu> listSpu = new ArrayList<>();
         ProductCar productCar = new ProductCar();
         PoductSpu poductSpu = new PoductSpu();
         //将前端的获取的字符串（举例：1,2,3）变成1 2 3 并存进入数组
+        System.out.println(zhi);
+     //   List<ProductSku> listSku,ProductCar productCar,PoductSpu poductSpu,List<PoductSpu>listSpu){
+        return list(zhi,listSku,productCar,poductSpu,listSpu,listattr);
+    }
 
-        String[] zhi1 = zhi.split(",");
+    /**
+     * zry
+     * 根据状态为
+     * @param session
+     * @return
+     */
+    //购物车的第三个页面
+    @RequestMapping(value = "selCar3")
+    public Map<String, Object> selCar3( HttpSession session) {
+        System.out.println("selCAR11111111111111");
+        System.out.println(session.getAttribute("zhi"));
+                String zhi= (String) session.getAttribute("zhi");
+    //    Map<String,Object> map=  session.getAttribute("map");
+        System.out.println("进入");
+        //   wxUser = (WxUser) session.getAttribute("Wxuser");
+        System.out.println(zhi);
+        List<ProductSku> listattr=new ArrayList<>();
+        List<ProductSku> listSku = new ArrayList<>();
+        List<PoductSpu> listSpu = new ArrayList<>();
+        ProductCar productCar = new ProductCar();
+        PoductSpu poductSpu = new PoductSpu();
+        //将前端的获取的字符串（举例：1,2,3）变成1 2 3 并存进入数组
+        List<ProductCar> listcar=productCarService.selectBystatue(0);
+        for (int i=0;i<listcar.size();i++){
+          int a=  listcar.get(i).getProductSkuId();
+            ProductSku productSkuattr=    productSkuService.selByAttr(a);
+            listattr.add(i,productSkuattr);
+        }
+
+        return list(zhi,listSku,productCar,poductSpu,listSpu,listattr);
+    }
+
+
+        @RequestMapping("insertCar")
+        public JsonBean insertCar(WxUser wxUser,ProductCar productCar,int num, int skuid){
+            productCar.setUserId(wxUser.getId());
+            productCar.setProductSkuId(skuid);
+            productCar.setProductSkuNum(num);
+            int a=   productCarService.insert(productCar);
+            System.out.println("加入成功："+a);
+            return  new JsonBean(0,a,"success");
+        }
+
+
+    public Map<String,Object> list(String zhi,List<ProductSku> listSku,ProductCar productCar,PoductSpu poductSpu,List<PoductSpu>listSpu,List<ProductSku> listattr) {
+        String[] zhi1 = zhi.split("undefined")[1].split(",");
         //循环输出数字信息 长度为数组的长度
+        System.out.println(zhi1);
 
         for (int i = 0; i < zhi1.length; i++) {
             //根据数组的值 当做sku表的id查询 所选中的购物车商品的信息
@@ -141,7 +201,7 @@ public class ShopCarController {
 //
         map.put("productCar", productCar);
         //根据选中的状态的商品查询购物车信息
-        List<ProductCar> listcar=productCarService.selectBystatue(0);
+        List<ProductCar> listcar = productCarService.selectBystatue(0);
         //数量
         int count = 0;
         for (int i = 0; i < listcar.size(); i++) {
@@ -155,48 +215,8 @@ public class ShopCarController {
         map.put("sum", 99);
         int jifen = (int) (99 * (0.75));
         map.put("jifen", jifen);
-        map.put("listcar",listcar);
+        map.put("listcar", listcar);
+        map.put("listattr", listattr);
         return map;
-    }
-
-    /**
-     * zry
-     * 根据状态为
-     * @param session
-     * @return
-     */
-    //购物车的第三个页面
-    @RequestMapping(value = "selCar3")
-    public Map<String, Object> selCar3(HttpSession session) {
-  //     WxUser wxUser = (WxUser) session.getAttribute("Wxuser");
-        Map<String, Object> map = new HashMap<>();
-      //  int sum = (int) session.getAttribute("sum");
-     //   List<ProductSku> skuList = productSkuService.selectByStatus(0);
-        //根据选中的状态的商品查询购物车信息
-        List<ProductCar> listcar=productCarService.selectBystatue(0);
-        //数量
-        int count = 0;
-        for (int i = 0; i < listcar.size(); i++) {
-            count++;
-        }
-
-
-        //  List<ProductSku> skuList=  session.getAttribute("listSku");
-        //h获取的信息存入map
-        map.put("count", count);
-        map.put("sum", 99);
-        int jifen = (int) (99 * (0.75));
-        map.put("jifen", jifen);
-        return map;
-    }
-
-    @RequestMapping("insertCar")
-    public JsonBean insertCar(WxUser wxUser,ProductCar productCar,int num, int skuid){
-    productCar.setUserId(wxUser.getId());
-    productCar.setProductSkuId(skuid);
-    productCar.setProductSkuNum(num);
-       int a=     productCarService.insert(productCar);
-        System.out.println("加入成功："+a);
-        return  new JsonBean(0,a,"success");
     }
 }

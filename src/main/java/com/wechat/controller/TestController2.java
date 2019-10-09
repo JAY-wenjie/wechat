@@ -166,6 +166,7 @@ public class TestController2 {
     @RequestMapping(value = "goodscomment")
     public List<ScoreSpu> goodscomment(Integer low,Integer high) {
         List<ScoreSpu> scoreSpus = scoreSpuService.selectBycomment(low,high);
+        System.out.println(low+"111"+high);
         return scoreSpus;
     }
 }

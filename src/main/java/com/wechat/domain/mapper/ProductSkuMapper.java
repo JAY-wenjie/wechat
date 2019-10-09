@@ -22,6 +22,8 @@ public interface ProductSkuMapper {
 
     List<ProductSku> selectByStatus(int id);
 
+    ProductSku selByAttr(int id);
+
     Map<String,Object> selectSkuBySpuId(@Param("spuId") int spuId);
 
     List<Map<String,Object>> selectSkuImgById(@Param("skuId") int skuId);

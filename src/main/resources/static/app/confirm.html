@@ -18,24 +18,30 @@
         $(window).load(function () {
             $(".loading").addClass("loader-chanage")
             $(".loading").fadeOut(300)
+            alert("显示");
+
             $.ajax({
                 type: "post",
                 debug: true,
-                url: "http://localhost:8080/wechat/selCar2.do",
+                url: "http://localhost:8080/wechat/selCar3.do",
 
                 //   data: {"zhi": zhi},
                 dataType: "json",
                 success: function (data) {
                     alert("777")
+                    var sum=0;
+                    var price=0;
                     alert(data.listSpu.length);
                     for (var i = 0; i < data.listSpu.length; i++) {
                         // var sum = (data.listSku[i].activePrice()) * (data.productCar.get(i).getProductSkuNum())
                         // sum++;
                         if (data.listSku[i].status == 1) {
                             alert("等以1");
+                            price=(data.listSku[i].activePrice)*(data.listcar[i].productSkuNum);
+                            alert(sum);
+                            alert("data.listSku[i].color"+data.listSku[i].color)
                             var str = "<div class=\"list clearfloat fl box-s\"><a href=\"pro-detail.html\"><div class=\"tu fl clearfloat\">\n" +
-                                "<img src=\"+data.listSku[i].skuImg+\"/></div><div class=\"middle clearfloat fl\"><p class=\"tit\">" + data.listSpu[0].describe + "</p><p class=\"fu-tit\">\n" +
-                                +data.listSku[i].color + "</p><p class=\"price clearfloat\"><span class=\"xprice fl\">" + data.listSku[i].activePrice + "</span><span class=\"yprice fl\">" + data.listSku[i].salePrice + "\"</span>\n" +
+                                "<img src="+data.listSku[i].skuImg+"></div><div class=\"middle clearfloat fl\"><p class=\"tit\">" + data.listSpu[0].describe + "</p><p class=\"fu-tit\">\n"+data.listSku[i].color+data.listattr[i].productAttr.attrValue.value+ "</p><p class=\"price clearfloat\"><span class=\"xprice fl\">" + data.listSku[i].activePrice + "</span><span class=\"yprice fl\">" + data.listSku[i].salePrice + "\"</span>\n" +
                                 "<span class=\"sjzhuanx fl\">手机专享价</span>\n" +
                                 "<span class=\"shu\">×" + data.listcar[i].productSkuNum + "</span>\n" +
                                 "</p>\n" +
@@ -44,9 +50,12 @@
                             $("#listC").append(str);
                         }else{
                             alert("status不等于1");
+                            alert("data.listSku[i].color"+data.listSku[i].color)
+                            price=(data.listSku[i].salePrice)*(data.listcar[i].productSkuNum);
+                            alert(sum);
                             var str = "<div class=\"list clearfloat fl box-s\"><a href=\"pro-detail.html\"><div class=\"tu fl clearfloat\">\n" +
-                                "<img src=\"+data.listSku[i].skuImg+\"/></div><div class=\"middle clearfloat fl\"><p class=\"tit\">" + data.listSpu[0].describe + "</p><p class=\"fu-tit\">\n" +
-                                +data.listSku[i].color + "</p><p class=\"price clearfloat\"><span class=\"xprice fl\">" + data.listSku[i].salePrice + "</span>\n" +
+                                "<img src="+data.listSku[i].skuImg+"></div><div class=\"middle clearfloat fl\"><p class=\"tit\">" + data.listSpu[0].describe + "</p>" +
+                                "<p class=\"fu-tit\">"+data.listSku[i].color+data.listattr[i].productAttr.attrValue.value+  "</p><p class=\"price clearfloat\"><span class=\"xprice fl\">" + data.listSku[i].salePrice + "</span>\n" +
                                 "<span class=\"sjzhuanx fl\">手机专享价</span>\n" +
                                 "<span class=\"shu\">×" + data.listcar[i].productSkuNum + "</span>\n" +
                                 "</p>\n" +
@@ -54,6 +63,8 @@
                                 "</a>\n";
                             $("#listC").append(str);
                         }
+                        sum+=price;
+                        alert(sum);
                     }
                     var msg=" <li class=\"clearfloat\">\n" +
                         "                <a href=\"#\">\n" +
@@ -64,7 +75,7 @@
                         "            <li class=\"clearfloat\">\n" +
                         "                <a href=\"#\">\n" +
                         "                    <p class=\"fl\">总商品金额：</p>\n" +
-                        "                    <span class=\"fr\">¥598</span>\n" +
+                        "                    <span class=\"fr\">"+sum+"</span>\n" +
                         "                </a>\n" +
                         "            </li>\n" +
                         "            <li class=\"clearfloat\">\n" +
@@ -81,10 +92,28 @@
                         "            </li>"
                     //   $("#sum").append(sum);
                         $("#msg").append(msg);
+
+                    var sum2=" <span >"+sum+"</span>";
+                    $("#sum").append(sum2);
+                    $("#sum2").append(sum2);
                 }
 
             })
         })
+
+        function a() {
+            $.ajax({
+                type: "post",
+                debug: true,
+                url: "http://localhost:8080/wechat/insertorder.do",
+
+                //   data: {"zhi": zhi},
+                dataType: "json",
+                success:function (data) {
+                    window.location.href="submit-order.html";
+                }
+            })
+        }
     </script>
 </head>
 <!--loading页开始-->
@@ -141,8 +170,8 @@
         <!--</div>-->
         <div class="confirm-total clearfloat box-s">
             <ul>
-                <li>合计：<samp>¥</samp>
-                    <span id="sum">598.00</span></li>
+                <li>合计：<samp id="sum">¥</samp>
+                   </li>
                 <li>共计2件商品</li>
             </ul>
         </div>
@@ -222,10 +251,10 @@
 </div>
 
 <footer class="page-footer fixed-footer" id="footer">
-    <p class="confirm-price fl box-s">
-        合计：<span>¥598</span>
+    <p class="confirm-price fl box-s" id="sum2">
+        <!--合计：<span>¥598</span>-->
     </p>
-    <a href="submit-order.html" class="confirm-submit fl">
+    <a  onclick="a()" class="confirm-submit fl">
         提交订单
     </a>
 </footer>
