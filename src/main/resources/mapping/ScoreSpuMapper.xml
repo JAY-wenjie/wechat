@@ -194,11 +194,22 @@
         where id=#{id}
     </update>
     <select id="selectByids" parameterType="list" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from score_spu where id in
         <foreach item="id" index="index" collection="list"
                  open="(" separator="," close=")">
             #{id}
         </foreach>
+    </select>
+    <select id="selectByscore" parameterType="integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from score_spu where socre =#{score} and status=1
+    </select>
+    <select id="selectBycomment" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from score_spu where comment&gt;=#{low} and comment&lt;= #{high}
     </select>
 </mapper>

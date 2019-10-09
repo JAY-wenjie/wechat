@@ -6,227 +6,333 @@
     <title>商品详情</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <script src="js/rem.js"></script> 
+    <script src="js/rem.js"></script>
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/base2.css"/>
     <link rel="stylesheet" type="text/css" href="css/page.css"/>
     <link rel="stylesheet" type="text/css" href="css/all.css"/>
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-<script type="text/javascript">
-	$(window).load(function(){
-		$(".loading").addClass("loader-chanage")
-		$(".loading").fadeOut(300)
-        alert(location.href.split("=")[1]);
-	})
-</script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $(".loading").addClass("loader-chanage")
+            $(".loading").fadeOut(300)
+            //alert(location.href.split("?")[1]);
+            //当前商品skuid
+            var skuId;
+            var spuId;
+            var result = location.href.split("?");
+            if (result.length > 1) {
+                spuId = result[1].split("=")[1];
+                if (spuId != null) {
+                    //alert(spuId);
+                    $.ajax({
+                        debug: true,
+                        type: "post",
+                        autoplay: true,
+                        url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/getskubyspuid.do",
+                        data: {"spuId": spuId},
+                        success: function (data) {
+                            if (data.code == 0) {
+                                var str = "";
+                                var imgs = data.data.skuImgs;
+                                for (i = 0; i < imgs.length; i++) {
+                                    $("#img" + i).attr({"src": imgs[i].src, "data-src": imgs[i].src});
+                                    str += "  <img src=\"" + imgs[i].src + "\"/>"
+                                }
+                                $(".talkbox1").append(str);
+                                var spu = data.data.spu;
+                                $("#spuName").html(spu.productName);
+                                $("#price").html(data.data.price);
+                                $("#amount").html("库存"+data.data.amount);
+                                skuId = data.data.id;
+                            } else {
+                                alert(data.msg)
+                            }
+                        }
+                    })
+                }
+            }
+
+            $.ajax({
+                type: "post",
+                url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/getspuattr.do",
+                data: {"spuId": spuId},
+                success: function (data) {
+                    if (data.code == 0) {
+                        var values = data.data.attrbute[0].valueList;
+                        //alert("尺寸"+values[0].size);
+                        var colors = data.data.colorList;
+                        //alert(colors);
+                        for(i=0;i<values.length;i++){
+                            var str = "<li value=\""+values[i].attrValueId+"\" data-aid=\""+values[i].attrValueId+"\"><a href=\"javascript:;\" title=\""+values[i].size+"\">"+values[i].size+"</a><i></i></li>";
+                            $("#sizeBox").append(str);
+                        }
+                        for(i=0;i<colors.length;i++){
+                            var str = "<li value=\""+colors[i].color+"\" data-aid=\""+colors[i].color+"\"><a href=\"javascript:;\" title=\""+colors[i].color+"\">"+colors[i].color+"</a><i></i></li>";
+                            $("#colorBox").append(str);
+                        }
+                        //alert("获取成功");
+                    } else {
+                       // alert("获取失败");
+                    }
+                }
+            });
+            /**
+             * 加入购物车
+             */
+            $("addCar").click(function () {
+                if (skuId != null) {
+                    $.ajax({
+                        type: "post",
+                        url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/insertCar.do",
+                        data: {"skuId": skuId, "num": 1},
+                        success: function (data) {
+                            if (data.code == 0) {
+                                alert("加入成功");
+                            } else {
+                                alert("加入失败");
+                            }
+                        }
+                    });
+                } else {
+                    alert("请选择要购买的商品");
+                }
+            })
+
+
+        })
+
+    </script>
 </head>
 <!--loading页开始-->
 <div class="loading">
-	<div class="loader">
+    <div class="loader">
         <div class="loader-inner pacman">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-	</div>
+    </div>
 </div>
 <!--loading页结束-->
-	<body>
-		<header class="mui-bar mui-bar-nav report-header box-s" id="header">
-			<a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
-			<p>商品详情</p>
-	    </header>
-	    <div id="main" class="mui-clearfix">
-	    	<div class="banner swiper-container">
-	            <div class="swiper-wrapper">
-	                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="upload/21.png" alt=""></a></div>
-	                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="upload/21.png" alt=""></a></div>
-	                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="upload/21.png" alt=""></a></div>
-	                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="upload/21.png" alt=""></a></div>
-	            </div>
-	            <div class="swiper-pagination"></div>
-	        </div>
-	        <div class="inte-top clearfloat box-s">
-	        	<div class="left clearfloat fl">
-	        		<p class="tit">XXX夏季流行女装</p>
-	        		<p class="price"><span>500</span>元<samp>￥208元</samp></p>
-	        	</div>
-	        	<div class="right clearfloat fr">
-	        		<i class="iconfont icon-shoucang"></i>
-	        		<p class="">收藏</p>
-	        	</div>
-	        </div>
-	        <div class="addj clearfloat">
-	        	<ul>
-	        		<li class="num">商品数量</li>
-	        		<li class="fuhao"><i class="iconfont icon-jian"></i></li>
-	        		<li class="shu">1</li>
-	        		<li class="fuhao"><i class="iconfont icon-jia-copy"></i></li>
-	        		<li class="last">库存96件</li>
-	        	</ul>
-	        </div>
-	        <article class="detail-article">
-				<nav>
-					<ul class="article">
-						<li id="talkbox1" class="article-active">商品详情</li>
-						<li id="talkbox2">商品评价(4)</li>
-					</ul>
-				</nav>
+<body>
+<header class="mui-bar mui-bar-nav report-header box-s" id="header">
+    <a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
+    <p>商品详情</p>
+</header>
+<div id="main" class="mui-clearfix">
+    <div class="banner swiper-container">
+        <div class="swiper-wrapper" id="lunboImg">
+            <div class="swiper-slide"><a href="javascript:void(0)"><img id="img0" class="swiper-lazy"
+                                                                        data-src="upload/21.png"
+                                                                        alt=""></a></div>
+            <div class="swiper-slide"><a href="javascript:void(0)"><img id="img1" class="swiper-lazy"
+                                                                        data-src="upload/21.png"
+                                                                        alt=""></a></div>
+            <div class="swiper-slide"><a href="javascript:void(0)"><img id="img2" class="swiper-lazy"
+                                                                        data-src="upload/21.png"
+                                                                        alt=""></a></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="inte-top clearfloat box-s">
+        <div class="left clearfloat fl">
+            <p class="tit" id="spuName">XXX夏季流行女装</p>
+            <p class="price"><span id="price">500</span>元</p>
+            <!--<samp>￥208元</samp>-->
+        </div>
+        <div class="right clearfloat fr">
+            <i class="iconfont icon-shoucang"></i>
+            <p class="">收藏</p>
+        </div>
+    </div>
+    <div class="addj clearfloat">
+        <dl class="clearfix iteminfo_parameter sys_item_specpara" data-sid="1">
+            <dt>颜色</dt>
+            <dd>
+                <ul class="sys_spec_text" id="colorBox">
+                </ul>
 
-				<section class="talkbox1">
-					<img src="upload/21.png"/>
-				</section>
+            </dd>
+        </dl>
+        <dl class="clearfix iteminfo_parameter sys_item_specpara" data-sid="2">
+            <dt>尺码</dt>
+            <dd>
+                <ul class="sys_spec_text" id="sizeBox">
+                </ul>
+            </dd>
+        </dl>
+        <ul>
+            <li class="num">商品数量</li>
+            <li class="fuhao"><i class="iconfont icon-jian"></i></li>
+            <li class="shu">1</li>
+            <li class="fuhao"><i class="iconfont icon-jia-copy"></i></li>
+            <li class="last" id="amount">库存96件</li>
+        </ul>
+    </div>
+    <article class="detail-article">
+        <nav>
+            <ul class="article">
+                <li id="talkbox1" class="article-active">商品详情</li>
+            </ul>
+        </nav>
 
-				<section class="talkbox2" style="display: none;">
-					<ul class="talk">
-						<li>
-							<figure><img src="upload/detail-tou.png"/></figure>
-							<dl>
-								<dt>
-									<p>瑾晨</p>
-									<time>2015.11.17</time>
-									<div class="star">
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn001.png"/></span>
-										<span><img src="img/detail-iocn001.png"/></span>
-									</div>
-								</dt>
-								<dd>哎哟不错哦，很性感哦！</dd>
-								<small>颜色：豹纹凯特</small>
-							</dl>
-						</li>
-						<li>
-							<figure><img src="upload/detail-tou.png"/></figure>
-							<dl>
-								<dt>
-									<p>瑾晨</p>
-									<time>2015.11.17</time>
-									<div class="star">
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn001.png"/></span>
-										<span><img src="img/detail-iocn001.png"/></span>
-									</div>
-								</dt>
-								<dd>哎哟不错哦，很性感哦！</dd>
-								<small>颜色：豹纹凯特</small>
-								<div class="picbox">
-									<img src="upload/2.jpg"/>
-									<img src="upload/2.jpg"/>
-									<img src="upload/2.jpg"/>
-									<img src="upload/2.jpg"/>
-								</div>
-							</dl>
-						</li>
-						<li>
-							<figure><img src="upload/detail-tou.png"/></figure>
-							<dl>
-								<dt>
-									<p>瑾晨</p>
-									<time>2015.11.17</time>
-									<div class="star">
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn001.png"/></span>
-										<span><img src="img/detail-iocn001.png"/></span>
-									</div>
-								</dt>
-								<dd>哎哟不错哦，很性感哦！</dd>
-								<small>颜色：豹纹凯特</small>
-							</dl>
-						</li>
-						<li>
-							<figure><img src="upload/detail-tou.png"/></figure>
-							<dl>
-								<dt>
-									<p>瑾晨</p>
-									<time>2015.11.17</time>
-									<div class="star">
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn01.png"/></span>
-										<span><img src="img/detail-iocn001.png"/></span>
-										<span><img src="img/detail-iocn001.png"/></span>
-									</div>
-								</dt>
-								<dd>哎哟不错哦，很性感哦！</dd>
-								<small>颜色：豹纹凯特</small>
-								<div class="picbox">
-									<img src="upload/2.jpg"/>
-									<img src="upload/2.jpg"/>
-								</div>
-							</dl>
-						</li>
-					</ul>
-				</section>
-				
-			</article>
-	    </div>
-	    
-	    <footer class="page-footer fixed-footer" id="footer">
-	     	<a href="shopcar.html" class="shopcaradd fl">
-	     		加入购物车
-	     	</a>
-	     	<a href="confirm.html" class="ljdhuan fl">
-	     		立即购买
-	     	</a>
-	    </footer>
-	</body>
-	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-	<script src="js/fastclick.js"></script>
-	<script src="js/mui.min.js"></script>
-	<script type="text/javascript" src="js/hmt.js" ></script>
-	<!--插件-->
-	<link rel="stylesheet" href="css/swiper.min.css">
-	<script src="js/swiper.jquery.min.js"></script>
-	<!--插件-->
-	<script src="js/global.js"></script>
-	<script >
-	    $(function () {
-	        var banner = new Swiper('.banner',{
-	            autoplay: 5000,
-	            pagination : '.swiper-pagination',
-	            paginationClickable: true,
-	            lazyLoading : true,
-	            loop:true
-	        });
-	
-	         mui('.pop-schwrap .sch-input').input();
-	        var deceleration = mui.os.ios?0.003:0.0009;
-	         mui('.pop-schwrap .scroll-wrap').scroll({
-	                bounce: true,
-	                indicators: true,
-	                deceleration:deceleration
-	        });
-	        $('.top-sch-box .fdj,.top-sch-box .sch-txt,.pop-schwrap .btn-back').on('click',function () {
-	            $('html,body').toggleClass('holding');
-	            $('.pop-schwrap').toggleClass('on');
-	            if($('.pop-schwrap').hasClass('on')) {;
-	                $('.pop-schwrap .sch-input').focus();
-	            }
-	        });
-	        
-	        $('.article li').click(function(){
+        <section class="talkbox1">
+            <!--<img src="upload/21.png"/>-->
+        </section>
 
-			$(this).addClass('article-active').siblings().removeClass('article-active');
-			if($(this).attr("id")=="talkbox1"){
-				$('.talkbox1').show();
-				$('.talkbox2').hide();
-			}else{
-				$('.talkbox2').show();
-				$('.talkbox1').hide();
-			}
+        <section class="talkbox2" style="display: none;">
+            <ul class="talk">
+                <li>
+                    <figure><img src="upload/detail-tou.png"/></figure>
+                    <dl>
+                        <dt>
+                            <p>瑾晨</p>
+                            <time>2015.11.17</time>
+                            <div class="star">
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn001.png"/></span>
+                                <span><img src="img/detail-iocn001.png"/></span>
+                            </div>
+                        </dt>
+                        <dd>哎哟不错哦，很性感哦！</dd>
+                        <small>颜色：豹纹凯特</small>
+                    </dl>
+                </li>
+                <li>
+                    <figure><img src="upload/detail-tou.png"/></figure>
+                    <dl>
+                        <dt>
+                            <p>瑾晨</p>
+                            <time>2015.11.17</time>
+                            <div class="star">
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn001.png"/></span>
+                                <span><img src="img/detail-iocn001.png"/></span>
+                            </div>
+                        </dt>
+                        <dd>哎哟不错哦，很性感哦！</dd>
+                        <small>颜色：豹纹凯特</small>
+                        <div class="picbox">
+                            <img src="upload/2.jpg"/>
+                            <img src="upload/2.jpg"/>
+                            <img src="upload/2.jpg"/>
+                            <img src="upload/2.jpg"/>
+                        </div>
+                    </dl>
+                </li>
+                <li>
+                    <figure><img src="upload/detail-tou.png"/></figure>
+                    <dl>
+                        <dt>
+                            <p>瑾晨</p>
+                            <time>2015.11.17</time>
+                            <div class="star">
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn001.png"/></span>
+                                <span><img src="img/detail-iocn001.png"/></span>
+                            </div>
+                        </dt>
+                        <dd>哎哟不错哦，很性感哦！</dd>
+                        <small>颜色：豹纹凯特</small>
+                    </dl>
+                </li>
+                <li>
+                    <figure><img src="upload/detail-tou.png"/></figure>
+                    <dl>
+                        <dt>
+                            <p>瑾晨</p>
+                            <time>2015.11.17</time>
+                            <div class="star">
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn01.png"/></span>
+                                <span><img src="img/detail-iocn001.png"/></span>
+                                <span><img src="img/detail-iocn001.png"/></span>
+                            </div>
+                        </dt>
+                        <dd>哎哟不错哦，很性感哦！</dd>
+                        <small>颜色：豹纹凯特</small>
+                        <div class="picbox">
+                            <img src="upload/2.jpg"/>
+                            <img src="upload/2.jpg"/>
+                        </div>
+                    </dl>
+                </li>
+            </ul>
+        </section>
 
-		});	
-	
-	    });
-	</script>
+    </article>
+</div>
+
+<footer class="page-footer fixed-footer" id="footer">
+    <a href="shopcar.html" class="shopcaradd fl" id="addCar">
+        加入购物车
+    </a>
+    <a href="confirm.html" class="ljdhuan fl">
+        立即购买
+    </a>
+</footer>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="js/mui.min.js"></script>
+<script type="text/javascript" src="js/hmt.js"></script>
+<!--插件-->
+<link rel="stylesheet" href="css/swiper.min.css">
+<script src="js/swiper.jquery.min.js"></script>
+<!--插件-->
+<script src="js/global.js"></script>
+<script>
+    $(function () {
+        var banner = new Swiper('.banner', {
+            autoplay: 5000,
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            lazyLoading: true,
+            loop: true
+        });
+
+        mui('.pop-schwrap .sch-input').input();
+        var deceleration = mui.os.ios ? 0.003 : 0.0009;
+        mui('.pop-schwrap .scroll-wrap').scroll({
+            bounce: true,
+            indicators: true,
+            deceleration: deceleration
+        });
+        $('.top-sch-box .fdj,.top-sch-box .sch-txt,.pop-schwrap .btn-back').on('click', function () {
+            $('html,body').toggleClass('holding');
+            $('.pop-schwrap').toggleClass('on');
+            if ($('.pop-schwrap').hasClass('on')) {
+                ;
+                $('.pop-schwrap .sch-input').focus();
+            }
+        });
+
+        $('.article li').click(function () {
+
+            $(this).addClass('article-active').siblings().removeClass('article-active');
+            if ($(this).attr("id") == "talkbox1") {
+                $('.talkbox1').show();
+                $('.talkbox2').hide();
+            } else {
+                $('.talkbox2').show();
+                $('.talkbox1').hide();
+            }
+
+        });
+
+    });
+</script>
 </html>

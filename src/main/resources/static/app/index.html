@@ -22,7 +22,7 @@
             $.ajax({
                 debug: true,
                 type: "post",
-                url: "http://05ualz4.hn3.mofasuidao.cn/wechat/news.do",
+                url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/news.do",
                 async: false,
                 success: function (data) {
                     //拼接数据
@@ -41,8 +41,37 @@
                     autoplay: true,
                     autoplaySpeed: 2000,
                 });
-
             }
+            $.ajax({
+                debug: true,
+                type: "post",
+                url: "http://5k9if5r.hn3.mofasuidao.cn/wechat/getproduct.do",
+                success: function (data) {
+
+                    if(data.code==0){
+                        var list = data.data;
+                        for(i=0;i<list.length;i++){
+                            var product = list[i];
+                            //alert(product.productSpuImg);
+                            var str = " <div class=\"list fl\">\n" +
+                                "                <a href=\"pro-detail.html?spuId="+product.id+"\">\n" +
+                                "                    <img src=\""+product.productSpuImg+"\"/>\n" +
+                                "                    <p class=\"tit\">"+product.productName+"</p>\n" +
+                                "                    <p class=\"fu-tit\">抢购价：<span>￥"+product.productSku.price+"</span></p>\n" +
+                                "                </a>\n" +
+                                "            </div>";
+                           // alert(str);
+                            $("#proBox2").append(str);
+                            $("#dayShow").append(str);
+
+                            $("#proBox3").append(str);
+                        }
+                    }else{
+                        alert(list.msg);
+                    }
+
+                }
+            })
         })
     </script>
 </head>
@@ -197,35 +226,9 @@
                 每日必看
             </div>
         </div>
-        <div class="pension clearfloat">
-            <div class="list fl">
-                <a href="pro-detail.html">
-                    <img src="upload/2.jpg"/>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">抢购价：<span>￥298.00</span></p>
-                </a>
-            </div>
-            <div class="list fl">
-                <a href="pro-detail.html">
-                    <img src="upload/2.jpg"/>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">抢购价：<span>￥298.00</span></p>
-                </a>
-            </div>
-            <div class="list fl">
-                <a href="pro-detail.html">
-                    <img src="upload/2.jpg"/>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">抢购价：<span>￥298.00</span></p>
-                </a>
-            </div>
-            <div class="list fl">
-                <a href="pro-detail.html">
-                    <img src="upload/2.jpg"/>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">抢购价：<span>￥298.00</span></p>
-                </a>
-            </div>
+        <!--每日必看-->
+        <div class="pension clearfloat" id="dayShow">
+
         </div>
 
         <div class="share clearfloat mt3">
@@ -233,50 +236,8 @@
                 <img src="upload/4.jpg"/>
             </a>
         </div>
-        <div class="slider filtering soffer-list clearfloat">
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="wisdom.html" class="index-more">更多产品>></a>
-            </div>
+        <div class="pension clearfloat" id="proBox2">
+
         </div>
 
 
@@ -285,102 +246,10 @@
                 <img src="upload/4.jpg"/>
             </a>
         </div>
-        <div class="slider filtering soffer-list clearfloat">
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="wisdom.html" class="index-more">更多产品>></a>
-            </div>
+        <div class="pension clearfloat" id="proBox3">
+
         </div>
 
-        <div class="share clearfloat mt3">
-            <a href="#">
-                <img src="upload/4.jpg"/>
-            </a>
-        </div>
-        <div class="slider filtering soffer-list clearfloat">
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="pro-detail.html">
-                    <div class="tu clearfloat">
-                        <span></span>
-                        <img src="upload/2.jpg"/>
-                    </div>
-                    <p class="tit">XXX衣服</p>
-                    <p class="fu-tit">￥298.00</p>
-                </a>
-            </div>
-            <div class="list clearfloat fl">
-                <a href="wisdom.html" class="index-more">更多产品>></a>
-            </div>
-        </div>
 
         <div class="share clearfloat mt3">
             <a href="#">

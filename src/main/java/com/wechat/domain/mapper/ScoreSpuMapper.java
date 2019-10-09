@@ -3,6 +3,7 @@ package com.wechat.domain.mapper;
 import com.wechat.domain.model.ScoreSpu;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ScoreSpuMapper {
     int deleteByPrimaryKey(Integer id);
@@ -38,4 +39,13 @@ public interface ScoreSpuMapper {
      * by杨思源
      */
     List<ScoreSpu> selectByids(List<Integer> ids);
+    /**
+     * 根据商品积分查询商品
+     */
+    List<ScoreSpu> selectByscore(Integer score);
+    /**
+     * 根据商品评分查询商品
+     */
+    List<ScoreSpu> selectBycomment(Map<String,Integer> map);
+
 }

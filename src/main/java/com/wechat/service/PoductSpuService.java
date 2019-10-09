@@ -1,6 +1,9 @@
 package com.wechat.service;
 
 import com.wechat.domain.model.PoductSpu;
+
+import java.util.List;
+
 public interface PoductSpuService{
 
 
@@ -15,5 +18,10 @@ public interface PoductSpuService{
     int updateByPrimaryKeySelective(PoductSpu record);
 
     int updateByPrimaryKey(PoductSpu record);
+    /**
+     * 查询所有spu
+     * @return
+     */
+    List<PoductSpu> selectAllProductSpu();
 
 }
